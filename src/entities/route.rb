@@ -1,13 +1,41 @@
 module ScenicRoute
   module Entities
+    ##
+    # Represents a route through some points on a {Map}.
     class Route
-      attr_reader :map, :points
+      ##
+      # @return [Map] The map which this route is associated with.
+      attr_reader :map
+      
+      ##
+      # @return [Array<Point>] The points which make up this route, in order.
+      attr_reader :points
 
+      ##
+      # Create a new route.
+      #
+      # @param [Map] map
+      # @param [Array<Point>] points
       def initialize(map, points)
         @map = map
         @points = points
       end
 
+      ##
+      # Returns the tile name for the tile representing a particular direction
+      # of movement onto and of off the tile. For example, moving onto a tile
+      # north and leaving east would require an r-shaped bend.
+      # 
+      # Directions are specified as symbols, one of :north, :south, :east or
+      # :west.
+      #
+      # @param [Symbol] in_heading The direction onto the tile.
+      # @param [Symbol] out_heading The direction off of the tile.
+      #
+      # @return [Symbol] The tile name, which may be passed to {TileSet#tile}.
+      #
+      # @raise [ArgumentError] If there is no tile to represent the given
+      #   movement.
       def tile_for_heading_delta(in_heading, out_heading)
         case [in_heading, out_heading]
         when [:north, :north], [:south, :south]
@@ -27,7 +55,14 @@ module ScenicRoute
         end
       end
 
-      def to_tile_map
+      ## 
+      # Calculates the tiles which must be drawn over a map to display this
+      # route as a track.
+      #
+      # @return [Hash] A hash of {Point} instances to tile name symbols. 
+      #   When a map is being drawn, tile (x, y) should be replaced by the value
+      #   for key (x, y) if it exists in this hash.
+      def to_tile_hash
         # TODO: special cases, less than 3 points?
         result = {
           points.first => :horizontal_straight_on_grass, # TODO

@@ -27,7 +27,7 @@ module ScenicRoute
         tile_height = 64
         tile_set = Tiles::TileManager.tile_set(:track)
 
-        route_tile_maps = routes.map(&:to_tile_map).reduce(&:merge) || {}
+        route_tile_maps = routes.map(&:to_tile_hash).reduce(&:merge) || {}
 
         map_width = layout.first.length
         map_height = layout.length
