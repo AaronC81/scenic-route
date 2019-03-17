@@ -1,4 +1,5 @@
 require 'gosu'
+require_relative 'point'
 
 module ScenicRoute
   module Entities
@@ -26,12 +27,21 @@ module ScenicRoute
         tile_height = 64
         tile_set = Tiles::TileManager.tile_set(:track)
 
+        route_tile_maps = routes.map(&:to_tile_map).reduce(&:merge) || {}
+
         map_width = layout.first.length
         map_height = layout.length
 
         map_width.times do |mx|
           map_height.times do |my|
-            this_tile = layout[my][mx]
+            if route_tile_maps[Point.new(mx, my)].nil?
+              # Draw the map background
+              this_tile = layout[my][mx]
+            else
+              # Draw a route tile
+              this_tile = route_tile_maps[Point.new(mx, my)]
+            end
+
             this_tile_x = tile_width * mx + start_x
             this_tile_y = tile_height * my + start_y
             tile_set.tile(this_tile).draw(this_tile_x, this_tile_y, z)
