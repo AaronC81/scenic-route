@@ -10,6 +10,7 @@ module ScenicRoute
 
       def tile(name)
         raise 'no tile definitions' if tile_definitions.nil?
+        raise "no tile #{name}" if tile_definitions[name].nil?
         images[tile_definitions[name]]
       end
 
