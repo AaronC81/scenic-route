@@ -5,13 +5,17 @@ module ScenicRoute
   module Tiles
     class TileManager
       TILE_SET_NAMES = {
-        track: ['res/spritesheet_tiles.png', 128, 128]
+        track: ['res/roads.png', -9, -9]
       }
 
       TILE_SET_DEFINITIONS = {
         track: {
-          straight_top: 0,
-          south_east_bend: 22
+          south_east_bend: 0,
+          north_west_bend: 7,
+          north_east_bend: 16,
+          south_west_bend: 21,
+          vertical_straight_on_grass: 6,
+          horizontal_straight_on_grass: 31
         }
       }
 
