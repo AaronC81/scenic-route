@@ -10,7 +10,7 @@ module ScenicRoute
       
       ##
       # @return [Hash] A hash of names as symbols to indeces in {#images}.
-      :tile_definitions
+      attr_reader :tile_definitions
 
       ##
       # Create a new tile set.
