@@ -3,7 +3,11 @@ require_relative 'point'
 
 module ScenicRoute
   module Entities
+    ##
+    # Represents a game map with routes drawn over it.
     class Map
+      ##
+      # An example map to demonstrate the layout required.
       EXAMPLE_MAP = [
         %I{water water water water water water water water},
         %I{water water grass grass grass grass water water},
@@ -13,14 +17,33 @@ module ScenicRoute
         %I{water water water water water water water water}
       ]
 
-      attr_reader :layout, :routes
+      ##
+      # @return [Array<Array<Symbol>>] A 2D array (row, col) of this map's 
+      #   fixed layout, where each element is a tile name. This does not change
+      #   as routes are drawn; elements are replaced with tracks when the map is
+      #   drawn.
+      attr_reader :layout
 
+      ##
+      # @return [Array<Route>] An array of the routes on this track.
+      attr_reader :routes
+
+      ## 
+      # Create a new map.
+      #
+      # @param [Array<Array<Symbol>>] layout
       def initialize(layout)
         # TODO: validate maps
         @layout = layout
         @routes = []
       end
 
+      ## 
+      # Draw this map and its routes onto the Gosu window.
+      #
+      # @param [Numeric] start_x The x position at which to start the map.
+      # @param [Numeric] start_y The y position at which to start the map.
+      # @param [Numeric] z The z position at which to draw the map.
       def draw(start_x, start_y, z)
         # TODO: store tile width and height in TileSet instead
         tile_width = 64
