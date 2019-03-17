@@ -10,10 +10,11 @@ module ScenicRoute
 
       TILE_SET_DEFINITIONS = {
         track: {
+          # The bend directions specify the sides on which the bend is open
           south_east_bend: 0,
           north_west_bend: 7,
-          north_east_bend: 16,
-          south_west_bend: 21,
+          north_east_bend: 15,
+          south_west_bend: 20,
           vertical_straight_on_grass: 6,
           horizontal_straight_on_grass: 31,
           grass: 33,
