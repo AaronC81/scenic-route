@@ -33,21 +33,9 @@ module ScenicRoute
       end
 
       ##
-      # An event handler called when {Gosu::Window#button_down} is called with
-      # a mouse ID.
-      def mouse_down(id)
-      end
-
-      ##
       # An event handler called when {Gosu::Window#button_up} is called, and
       # is not a mouse event.
       def button_up(id)
-      end
-
-      ##
-      # An event handler called when {Gosu::Window#button_up} is called with
-      # a mouse ID.
-      def mouse_up(id)
       end
     end
   end

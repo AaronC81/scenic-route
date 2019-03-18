@@ -24,21 +24,11 @@ module ScenicRoute
     end
 
     def button_down(id)
-      # Dispatch depending on whether mouse or keyboard
-      if id >= 256 && id <= 258
-        UI::ControllerSupervisor.dispatch(:mouse_down, id)
-      else
-        UI::ControllerSupervisor.dispatch(:button_down, id)
-      end
+      UI::ControllerSupervisor.dispatch(:button_down, id)
     end
 
     def button_up(id)
-      # Dispatch depending on whether mouse or keyboard
-      if id >= 256 && id <= 258
-        UI::ControllerSupervisor.dispatch(:mouse_up, id)
-      else
-        UI::ControllerSupervisor.dispatch(:mouse_down, id)
-      end
+      UI::ControllerSupervisor.dispatch(:button_up, id)
     end
 
     def needs_cursor?

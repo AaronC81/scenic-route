@@ -47,16 +47,16 @@ module ScenicRoute
         end
       end
 
-      def mouse_down(id)
+      def button_down(id)
         super
 
-        @drawing = true
+        @drawing = true if id == Gosu::MsLeft
       end
 
-      def mouse_up(id)
+      def button_up(id)
         super
 
-        @drawing = false
+        @drawing = false if id == Gosu::MsLeft
       end
     end
   end
