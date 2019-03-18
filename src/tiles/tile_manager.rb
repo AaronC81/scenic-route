@@ -1,5 +1,6 @@
 require 'gosu'
 require_relative 'tile_set'
+require_relative 'world_tile_set'
 
 module ScenicRoute
   module Tiles
@@ -9,7 +10,7 @@ module ScenicRoute
       ##
       # A mapping of known tile set names to their filepaths and tile sizes.
       TILE_SET_NAMES = {
-        world: ['res/world.png', 64, 64]
+        world: [WorldTileSet, 'res/world.png', 64, 64]
       }
 
       ##
@@ -51,9 +52,10 @@ module ScenicRoute
         # Load this tile set according to what its name was specified as
         if name.is_a?(Symbol)
           raise ArgumentError, 'unknown tile set' if TILE_SET_NAMES[name].nil?
-          filename, width, height = TILE_SET_NAMES[name]
+          kind, filename, width, height = TILE_SET_NAMES[name]
         elsif name.is_a?(String)
           filename = name
+          kind = TileSet
         else
           raise ArgumentError, 'tile set name must be a string or symbol'
         end
@@ -65,7 +67,7 @@ module ScenicRoute
         defs = tile_definitions || TILE_SET_DEFINITIONS[name]
 
         # Memoise and return this tileset
-        @@loaded_tile_sets[name] = TileSet.new(result, width, height, defs)
+        @@loaded_tile_sets[name] = kind.new(result, width, height, defs)
       end
     end
   end
