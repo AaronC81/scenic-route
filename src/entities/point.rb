@@ -19,6 +19,21 @@ module ScenicRoute
         end
       end
 
+      def moved(direction)
+        case direction
+        when :north
+          Point.new(x, y - 1)
+        when :south
+          Point.new(x, y + 1)
+        when :east
+          Point.new(x + 1, y)
+        when :west
+          Point.new(x - 1, y)
+        else
+          raise ArgumentError, 'unknown direction'
+        end
+      end
+
       def adjacent_to?(other)
         heading_to(other, true) != nil
       end
