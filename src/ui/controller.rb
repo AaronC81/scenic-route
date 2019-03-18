@@ -17,6 +17,11 @@ module ScenicRoute
       # An event handler called when {Gosu::Window#draw} is called.
       def draw
       end
+
+      ##
+      # An event handler called when {Gosu::Window#button_down} is called.
+      def button_down(id)
+      end
     end
   end
 end
