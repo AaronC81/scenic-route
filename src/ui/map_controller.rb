@@ -27,6 +27,7 @@ module ScenicRoute
         @map = map
         @origin = origin
         @drawing = false
+        @removing = false
       end
 
       ##
