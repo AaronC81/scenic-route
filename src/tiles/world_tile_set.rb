@@ -19,7 +19,11 @@ module ScenicRoute
         :track_vertical_straight_on_ground,
         :track_horizontal_straight_on_ground,
         :scene_ground,
-        :scene_backdrop
+        :scene_backdrop,
+        :object_station_south,
+        :object_station_north,
+        :object_station_east,
+        :object_station_west
       ]
 
       REQUIRED_SYMBOLS.each do |sym|
