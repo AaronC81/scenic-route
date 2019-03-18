@@ -71,7 +71,7 @@ module ScenicRoute
         # Check bounds and valid tile
         return false if point.x < 0 || point.x >= width 
         return false if point.y < 0 || point.y >= height
-        return false unless tile_set.can_place_on?(layout[point.y][point.x])
+        return false unless tile_set.can_place_on?(layout[point.y][point.x]) && !tile_objects.map(&:point).include?(point)
 
         # Ensure this point doesn't already exist in a route
         return false if routes.flat_map(&:points).include?(point)
@@ -158,7 +158,7 @@ module ScenicRoute
         if route_tile_maps[point]
           route_tile_maps[point]
         elsif tile_object_maps[point]
-          tile_object_maps[point]
+          tile_object_maps[point].tile_name
         else
           layout[point.y][point.x]
         end
