@@ -33,6 +33,10 @@ module ScenicRoute
       # @return [Tiles::TileSet] The tile set with which this map is drawn.
       attr_reader :tile_set
 
+      ##
+      # @return [Array<TileObject>] The tile objects on this map.
+      attr_reader :tile_objects
+
       ## 
       # Create a new map.
       #
@@ -42,6 +46,7 @@ module ScenicRoute
         # TODO: validate maps
         @layout = layout
         @tile_set = tile_set
+        @tile_objects = []
         @routes = []
       end
 
