@@ -20,8 +20,8 @@ module ScenicRoute
         @@controllers.delete(controller)
       end
 
-      def self.dispatch(method_name)
-        @@controllers.map { |c| c.send(method_name) }
+      def self.dispatch(method_name, *args)
+        @@controllers.map { |c| c.send(method_name, *args) }
       end
     end
   end
