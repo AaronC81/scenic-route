@@ -50,19 +50,21 @@ module ScenicRoute
         # Load this tile set according to what its name was specified as
         if name.is_a?(Symbol)
           raise ArgumentError, 'unknown tile set' if TILE_SET_NAMES[name].nil?
-          result = Gosu::Image.load_tiles(*TILE_SET_NAMES[name])
+          filename, width, height = TILE_SET_NAMES[name]
         elsif name.is_a?(String)
-          raise ArgumentError, 'no dimensions given' if width.nil? || height.nil?
-          result = Gosu::Image.load_tiles(name, width, height)
+          filename = name
         else
           raise ArgumentError, 'tile set name must be a string or symbol'
         end
-
+        
+        raise ArgumentError, 'no dimensions given' if width.nil? || height.nil?
+        result = Gosu::Image.load_tiles(filename, width, height)
+          
         # Use supplied tile defs for this tileset, or look at the ones we know
         defs = tile_definitions || TILE_SET_DEFINITIONS[name]
 
         # Memoise and return this tileset
-        @@loaded_tile_sets[name] = TileSet.new(result, defs)
+        @@loaded_tile_sets[name] = TileSet.new(result, width, height, defs)
       end
     end
   end

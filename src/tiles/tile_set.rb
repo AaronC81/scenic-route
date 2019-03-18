@@ -13,11 +13,21 @@ module ScenicRoute
       attr_reader :tile_definitions
 
       ##
+      # @return [Numeric] The width of one tile.
+      attr_reader :width
+
+      ##
+      # @return [Numeric] The height of one tile.
+      attr_reader :height
+
+      ##
       # Create a new tile set.
       # 
       # @param [Array<Gosu::Image>] images
+      # @param [Numeric] width
+      # @param [Numeric] height
       # @param [Hash] tile_definitions
-      def initialize(images, tile_definitions=nil)
+      def initialize(images, width=nil, height=nil, tile_definitions=nil)
         @images = images
         @tile_definitions = tile_definitions
       end
