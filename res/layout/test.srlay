@@ -8,3 +8,4 @@
 ---
 StationObject 2,2 :east 1
 StationObject 16,4 :north 1
+LandmarkObject 5,3 :statue
