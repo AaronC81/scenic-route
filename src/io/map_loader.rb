@@ -34,7 +34,7 @@ module ScenicRoute
           object_name, *parameters = line.split
           Entities.const_get(object_name).new(*parameters.map do |param|
             if param.include?(?,)
-              Entities::Point.new(*param.split(?,))
+              Entities::Point.new(*param.split(?,).map(&:to_i))
             elsif param.include?(?.)
               param.to_f
             elsif param.start_with?(?:)
@@ -52,6 +52,8 @@ module ScenicRoute
 
         map = Entities::Map.new(convert_layout(layout_str), tile_set)
         map.tile_objects.append(*convert_objects(objects_str))
+
+        p map.tile_objects
 
         map
       end
