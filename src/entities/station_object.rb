@@ -21,7 +21,7 @@ module ScenicRoute
       end
 
       def tile_name
-        :placeholder
+        "object_station_#{orientation}".to_sym
       end
     end
   end
