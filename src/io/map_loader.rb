@@ -38,7 +38,7 @@ module ScenicRoute
             elsif param.include?(?.)
               param.to_f
             elsif param.start_with?(?:)
-              param.to_sym
+              param[1..-1].to_sym
             else
               param.to_i
             end
