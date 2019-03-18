@@ -6,6 +6,7 @@ require_relative 'entities/point'
 require_relative 'ui/map_controller'
 require_relative 'ui/controller_supervisor'
 require_relative 'io/map_loader'
+require_relative 'entities/station_object'
 
 module ScenicRoute
   class Game < Gosu::Window
