@@ -21,6 +21,7 @@ module ScenicRoute
           north_west_bend: 7,
           north_east_bend: 15,
           south_west_bend: 20,
+          intersection: 23,
           vertical_straight_on_grass: 6,
           horizontal_straight_on_grass: 31,
           grass: 33,
