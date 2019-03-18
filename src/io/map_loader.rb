@@ -53,8 +53,6 @@ module ScenicRoute
         map = Entities::Map.new(convert_layout(layout_str), tile_set)
         map.tile_objects.append(*convert_objects(objects_str))
 
-        p map.tile_objects
-
         map
       end
     end
