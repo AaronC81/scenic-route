@@ -12,6 +12,14 @@ module ScenicRoute
         @@controllers
       end
 
+      def self.window=(window)
+        @@window = window
+      end
+
+      def self.window
+        @@window
+      end
+
       def self.register(controller)
         @@controllers << controller
       end

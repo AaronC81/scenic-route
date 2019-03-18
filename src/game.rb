@@ -11,6 +11,8 @@ module ScenicRoute
     def initialize
       super 800, 600
       
+      UI::ControllerSupervisor.window = self
+
       UI::MapController.new(
         Entities::Map.new(Entities::Map::EXAMPLE_MAP, Tiles::TileManager.tile_set(:track)),
         Entities::Point.new(0, 0)
