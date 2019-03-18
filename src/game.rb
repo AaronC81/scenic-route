@@ -31,6 +31,16 @@ module ScenicRoute
       end
     end
 
+    def button_up(id)
+      # Dispatch depending on whether mouse or keyboard
+      if id >= 256 && id <= 258
+        UI::ControllerSupervisor.dispatch(:mouse_up, id,
+          Entities::Point.new(mouse_x, mouse_y))
+      else
+        UI::ControllerSupervisor.dispatch(:mouse_down, id)
+      end
+    end
+
     def needs_cursor?
       true
     end
