@@ -12,7 +12,7 @@ module ScenicRoute
       end
 
       def tile_name
-        "object_landmark_#{station}".to_sym
+        "object_landmark_#{kind}".to_sym
       end
     end
   end
