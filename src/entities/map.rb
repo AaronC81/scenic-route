@@ -46,6 +46,18 @@ module ScenicRoute
       end
 
       ##
+      # @return [Numeric] How many tiles wide this map is.
+      def width
+        layout.first.length
+      end
+
+      ##
+      # @return [Numeric] How many tiles tall this map is.
+      def height
+        layout.length
+      end
+
+      ##
       # Place a track piece at a specific location, adjusing routes accordingly.
       #
       # @param [Point] point
@@ -100,11 +112,8 @@ module ScenicRoute
 
         route_tile_maps = routes.map(&:to_tile_hash).reduce(&:merge) || {}
 
-        map_width = layout.first.length
-        map_height = layout.length
-
-        map_width.times do |mx|
-          map_height.times do |my|
+        width.times do |mx|
+          height.times do |my|
             if route_tile_maps[Point.new(mx, my)].nil?
               # Draw the map background
               this_tile = layout[my][mx]
