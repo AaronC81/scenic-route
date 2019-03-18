@@ -73,12 +73,50 @@ module ScenicRoute
           direction_in = prev_pt.heading_to(curr_pt)
           direction_out = curr_pt.heading_to(next_pt)
 
-          puts "#{direction_in} -> #{direction_out}"
-
           result[curr_pt] = tile_for_heading_delta(direction_in, direction_out)
         end
 
         result
+      end
+
+      ##
+      # Joins this route with another and returns the new route. This ensures
+      # that, if the two routes were going in different directions, the 
+      # direction is normalised. The two routes should have no overlapping
+      # points and have at least one adjacent end.
+      #
+      # @param [Route] other
+      #
+      # @return [Route] The joined route.
+      def join(other)
+        # TODO: length edge cases
+        # TODO: check same map
+
+        if points.first.adjacent_to?(other.points.first)
+          combined = other.points.reverse + points
+        elsif points.last.adjacent_to?(other.points.last)
+          combined = points + other.points.reverse
+        elsif points.first.adjacent_to?(other.points.last)
+          combined = other.points + points
+        elsif points.last.adjacent_to?(other.points.first)
+          combined = points + other.points
+        end
+
+        Route.new(map, combined)
+      end
+
+      ##
+      # Returns a boolean indicating whether an end of this route is adjacent
+      # to an end of another one.
+      #
+      # @param [Route] other
+      #
+      # @return [Boolean]
+      def adjacent_to?(other)
+        points.first.adjacent_to?(other.points.first) \
+          || points.last.adjacent_to?(other.points.last) \
+          || points.first.adjacent_to?(other.points.last) \
+          || points.last.adjacent_to?(other.points.first)
       end
     end
   end
