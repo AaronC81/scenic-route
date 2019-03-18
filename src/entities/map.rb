@@ -143,6 +143,28 @@ module ScenicRoute
       end
 
       ##
+      # Retrives the top-level tile at a given tile point. If there is an object
+      # or a track at a point, that is returned, otherwise the layout tile is 
+      # returned.
+      #
+      # @param [Point] point The point to return a tile for.
+      #
+      # @return [Symbol] A tile name.
+      def tile_at(point)
+        # TODO: Memoise these?
+        route_tile_maps = routes.map(&:to_tile_hash).reduce(&:merge) || {}
+        tile_object_maps = tile_objects.map { |o| [o.point, o] }.to_h
+
+        if route_tile_maps[point]
+          route_tile_maps[point]
+        elsif tile_object_maps[point]
+          tile_object_maps[point]
+        else
+          layout[point.y][point.x]
+        end
+      end
+
+      ##
       # Scans through the routes on this map, consolidating ones which have
       # adjacent ends. This is called automatically after {place_track} and
       # {remove_track}.
@@ -179,18 +201,9 @@ module ScenicRoute
       def draw(start_x, start_y, z)
         tile_set = Tiles::TileManager.tile_set(:world)
 
-        route_tile_maps = routes.map(&:to_tile_hash).reduce(&:merge) || {}
-
         width.times do |mx|
           height.times do |my|
-            if route_tile_maps[Point.new(mx, my)].nil?
-              # Draw the map background
-              this_tile = layout[my][mx]
-            else
-              # Draw a route tile
-              this_tile = route_tile_maps[Point.new(mx, my)]
-            end
-
+            this_tile = tile_at(Point.new(mx, my))
             this_tile_x = tile_set.width * mx + start_x
             this_tile_y = tile_set.height * my + start_y
             tile_set.tile(this_tile).draw(this_tile_x, this_tile_y, z)
