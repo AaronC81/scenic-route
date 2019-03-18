@@ -63,10 +63,18 @@ module ScenicRoute
       #   When a map is being drawn, tile (x, y) should be replaced by the value
       #   for key (x, y) if it exists in this hash.
       def to_tile_hash
+        return {} if points.length == 0
+        return {points.first => :intersection} if points.length == 1
+
         # TODO: special cases, less than 3 points?
         result = {
-          points.first => :horizontal_straight_on_grass, # TODO
-          points.last => :horizontal_straight_on_grass  # TODO
+          points.first => [:west, :east].include?(points.first.heading_to(points[1])) \
+            ? :horizontal_straight_on_grass
+            : :vertical_straight_on_grass,
+
+          points.last => [:west, :east].include?(points.last.heading_to(points[-2])) \
+            ? :horizontal_straight_on_grass
+            : :vertical_straight_on_grass
         }
 
         points.each_cons(3) do |prev_pt, curr_pt, next_pt|
