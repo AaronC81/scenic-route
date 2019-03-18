@@ -19,14 +19,19 @@ module ScenicRoute
         world: {
           # The bend directions specify the sides on which the bend is open
           track_south_east_bend: 0,
-          track_north_west_bend: 7,
-          track_north_east_bend: 15,
-          track_south_west_bend: 20,
-          track_intersection: 23,
-          track_vertical_straight_on_ground: 6,
-          track_horizontal_straight_on_ground: 31,
-          scene_ground: 33,
-          scene_backdrop: 36
+          track_north_west_bend: 2,
+          track_north_east_bend: 3,
+          track_south_west_bend: 1,
+          track_intersection: 4,
+          track_vertical_straight_on_ground: 5,
+          track_horizontal_straight_on_ground: 6,
+          scene_ground: 7,
+          scene_backdrop: 8,
+          object_station_south: 9,
+          object_station_north: 10,
+          object_station_east: 11,
+          object_station_west: 12,
+          placeholder: 13
         }
       }
 
