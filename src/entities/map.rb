@@ -29,13 +29,19 @@ module ScenicRoute
       # @return [Array<Route>] An array of the routes on this track.
       attr_reader :routes
 
+      ##
+      # @return [Tiles::TileSet] The tile set with which this map is drawn.
+      attr_reader :tile_set
+
       ## 
       # Create a new map.
       #
       # @param [Array<Array<Symbol>>] layout
-      def initialize(layout)
+      # @param [TileSet] tile_set
+      def initialize(layout, tile_set)
         # TODO: validate maps
         @layout = layout
+        @tile_set = tile_set
         @routes = []
       end
 
@@ -90,9 +96,6 @@ module ScenicRoute
       # @param [Numeric] start_y The y position at which to start the map.
       # @param [Numeric] z The z position at which to draw the map.
       def draw(start_x, start_y, z)
-        # TODO: store tile width and height in TileSet instead
-        tile_width = 64
-        tile_height = 64
         tile_set = Tiles::TileManager.tile_set(:track)
 
         route_tile_maps = routes.map(&:to_tile_hash).reduce(&:merge) || {}
@@ -110,8 +113,8 @@ module ScenicRoute
               this_tile = route_tile_maps[Point.new(mx, my)]
             end
 
-            this_tile_x = tile_width * mx + start_x
-            this_tile_y = tile_height * my + start_y
+            this_tile_x = tile_set.width * mx + start_x
+            this_tile_y = tile_set.height * my + start_y
             tile_set.tile(this_tile).draw(this_tile_x, this_tile_y, z)
           end
         end
