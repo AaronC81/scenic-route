@@ -145,6 +145,19 @@ module ScenicRoute
           || points.first.adjacent_to?(other.points.last) \
           || points.last.adjacent_to?(other.points.first)
       end
+
+      ##
+      # Returns a boolean indicating whether this route has ends at exactly
+      # the two given points.
+      #
+      # @param [Point] a
+      # @param [Point] b
+      #
+      # @return [Boolean]
+      def connects?(a, b)
+        (points.first == a && points.last == b) \
+          || (points.last == a && points.first == b)
+      end
     end
   end
 end
