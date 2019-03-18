@@ -1,4 +1,5 @@
 require_relative '../entities/map'
+require_relative '../entities/point'
 require_relative 'controller'
 
 module ScenicRoute
@@ -33,6 +34,20 @@ module ScenicRoute
         super
 
         map.draw(origin.x, origin.y, 1)
+      end
+
+      ##
+      # Handles new tracks being drawn.
+      def mouse_down(id, mouse_point)
+        super
+        
+        # Check where we were on the map
+        tile_x = (mouse_point.x - origin.x) / map.tile_set.width
+        tile_y = (mouse_point.y - origin.y) / map.tile_set.height
+
+        if tile_x >= 0 && tile_x <= map.width && tile_y >= 0 && tile_y <= map.height
+          map.place_track(Entities::Point.new(tile_x.to_i, tile_y.to_i))
+        end
       end
     end
   end
