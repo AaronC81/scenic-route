@@ -44,6 +44,13 @@ module ScenicRoute
         REQUIRED_SYMBOLS.all? { |sym| tile_definitions.include?(sym) }
       end
       
+      ##
+      # Determines whether a tile can have a track placed over it.
+      #
+      # @param [String] name The tile.
+      #
+      # @return [Boolean] True if the tile can have a track placed over it, or
+      #   false otherwise.
       def can_place_on?(name)
         name == :scene_ground
       end
