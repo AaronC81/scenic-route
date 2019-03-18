@@ -61,6 +61,7 @@ module ScenicRoute
       # Place a track piece at a specific location, adjusing routes accordingly.
       #
       # @param [Point] point
+      # @return [Boolean] True if the track piece was inserted, false otherwise.
       #
       # @raise [ArgumentError] If the point already exists in a route.
       def place_track(point)
@@ -69,8 +70,7 @@ module ScenicRoute
         inserted = false
         routes.each do |route|
           # Ensure this point doesn't already exist in a route
-          raise ArgumentError, 'point already exists' \
-            if route.points.include?(point)
+          return false if route.points.include?(point)
 
           # If this point fits at either end of an existing route, add it and
           # leave the function
@@ -99,6 +99,8 @@ module ScenicRoute
             end
           end
         end
+
+        true
       end
 
       ## 

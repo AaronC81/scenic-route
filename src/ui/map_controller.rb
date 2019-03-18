@@ -48,9 +48,7 @@ module ScenicRoute
         tile_y = (mouse_point.y - origin.y) / map.tile_set.height
 
         if tile_x >= 0 && tile_x <= map.width && tile_y >= 0 && tile_y <= map.height
-          begin
-            map.place_track(Entities::Point.new(tile_x.to_i, tile_y.to_i))
-          rescue ArgumentError; end
+          map.place_track(Entities::Point.new(tile_x.to_i, tile_y.to_i))
         end
       end
     end
