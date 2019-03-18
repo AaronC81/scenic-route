@@ -1,4 +1,5 @@
 require_relative '../entities/station_object'
+require_relative '../entities/landmark_object'
 
 module ScenicRoute
   module Gameplay
@@ -14,6 +15,7 @@ module ScenicRoute
       def self.score_for_map(map)
         # TODO: currently only supports one station pair
         stations = map.tile_objects.select { |x| x.is_a?(Entities::StationObject) }
+        landmarks = map.tile_objects.select { |x| x.is_a?(Entities::LandmarkObject) }
         raise 'too many stations, unimplemented' unless stations.length == 2
 
         score = 0
@@ -21,10 +23,13 @@ module ScenicRoute
         a, b = stations
         map.routes.each do |route|
           if route.connects?(a.point.moved(a.orientation), b.point.moved(b.orientation))
-            # This route links the two stations
-            # Our score is its length
-
-            score += route.points.length
+            route.points.each do |point|
+              value = 1
+              landmarks.each do |landmark|
+                value *= 2 if landmark.within_bonus_range?(point)
+              end
+              score += value
+            end
           end
         end
 
