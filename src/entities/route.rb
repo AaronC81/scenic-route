@@ -39,17 +39,17 @@ module ScenicRoute
       def tile_for_heading_delta(in_heading, out_heading)
         case [in_heading, out_heading]
         when [:north, :north], [:south, :south]
-          :vertical_straight_on_grass
+          :track_vertical_straight_on_ground
         when [:east, :east], [:west, :west]
-          :horizontal_straight_on_grass
+          :track_horizontal_straight_on_ground
         when [:east, :south], [:north, :west]
-          :south_west_bend
+          :track_south_west_bend
         when [:west, :north], [:south, :east]
-          :north_east_bend
+          :track_north_east_bend
         when [:east, :north], [:south, :west]
-          :north_west_bend
+          :track_north_west_bend
         when [:north, :east], [:west, :south]
-          :south_east_bend
+          :track_south_east_bend
         else
           raise ArgumentError, 'impossible heading delta'
         end
@@ -64,17 +64,17 @@ module ScenicRoute
       #   for key (x, y) if it exists in this hash.
       def to_tile_hash
         return {} if points.length == 0
-        return {points.first => :intersection} if points.length == 1
+        return {points.first => :track_intersection} if points.length == 1
 
         # TODO: special cases, less than 3 points?
         result = {
           points.first => [:west, :east].include?(points.first.heading_to(points[1])) \
-            ? :horizontal_straight_on_grass
-            : :vertical_straight_on_grass,
+            ? :track_horizontal_straight_on_ground
+            : :track_vertical_straight_on_ground,
 
           points.last => [:west, :east].include?(points.last.heading_to(points[-2])) \
-            ? :horizontal_straight_on_grass
-            : :vertical_straight_on_grass
+            ? :track_horizontal_straight_on_ground
+            : :track_vertical_straight_on_ground
         }
 
         points.each_cons(3) do |prev_pt, curr_pt, next_pt|

@@ -10,12 +10,12 @@ module ScenicRoute
       ##
       # An example map to demonstrate the layout required.
       EXAMPLE_MAP = [
-        %I{water water water water water water water water},
-        %I{water water grass grass grass grass water water},
-        %I{water grass grass grass grass grass water water},
-        %I{water water grass grass water grass water water},
-        %I{water water grass water water grass grass water},
-        %I{water water water water water water water water}
+        %I{scene_backdrop scene_backdrop scene_backdrop scene_backdrop scene_backdrop scene_backdrop scene_backdrop scene_backdrop},
+        %I{scene_backdrop scene_backdrop scene_ground scene_ground scene_ground scene_ground scene_backdrop scene_backdrop},
+        %I{scene_backdrop scene_ground scene_ground scene_ground scene_ground scene_ground scene_backdrop scene_backdrop},
+        %I{scene_backdrop scene_backdrop scene_ground scene_ground scene_backdrop scene_ground scene_backdrop scene_backdrop},
+        %I{scene_backdrop scene_backdrop scene_ground scene_backdrop scene_backdrop scene_ground scene_ground scene_backdrop},
+        %I{scene_backdrop scene_backdrop scene_backdrop scene_backdrop scene_backdrop scene_backdrop scene_backdrop scene_backdrop}
       ]
 
       ##
@@ -66,7 +66,7 @@ module ScenicRoute
         # Check bounds and valid tile
         return false if point.x < 0 || point.x >= width 
         return false if point.y < 0 || point.y >= height
-        return false if layout[point.y][point.x] != :grass
+        return false if layout[point.y][point.x] != :scene_ground
 
         # Ensure this point doesn't already exist in a route
         return false if routes.flat_map(&:points).include?(point)
@@ -172,7 +172,7 @@ module ScenicRoute
       # @param [Numeric] start_y The y position at which to start the map.
       # @param [Numeric] z The z position at which to draw the map.
       def draw(start_x, start_y, z)
-        tile_set = Tiles::TileManager.tile_set(:track)
+        tile_set = Tiles::TileManager.tile_set(:world)
 
         route_tile_maps = routes.map(&:to_tile_hash).reduce(&:merge) || {}
 

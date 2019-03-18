@@ -14,7 +14,7 @@ module ScenicRoute
       UI::ControllerSupervisor.window = self
 
       UI::MapController.new(
-        Entities::Map.new(Entities::Map::EXAMPLE_MAP, Tiles::TileManager.tile_set(:track)),
+        Entities::Map.new(Entities::Map::EXAMPLE_MAP, Tiles::TileManager.tile_set(:world)),
         Entities::Point.new(0, 0)
       )
     end 

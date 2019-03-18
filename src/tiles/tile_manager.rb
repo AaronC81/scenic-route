@@ -9,23 +9,23 @@ module ScenicRoute
       ##
       # A mapping of known tile set names to their filepaths and tile sizes.
       TILE_SET_NAMES = {
-        track: ['res/roads.png', 64, 64]
+        world: ['res/world.png', 64, 64]
       }
 
       ##
       # A mapping of known tile set names to their tile definition hashes.
       TILE_SET_DEFINITIONS = {
-        track: {
+        world: {
           # The bend directions specify the sides on which the bend is open
-          south_east_bend: 0,
-          north_west_bend: 7,
-          north_east_bend: 15,
-          south_west_bend: 20,
-          intersection: 23,
-          vertical_straight_on_grass: 6,
-          horizontal_straight_on_grass: 31,
-          grass: 33,
-          water: 36
+          track_south_east_bend: 0,
+          track_north_west_bend: 7,
+          track_north_east_bend: 15,
+          track_south_west_bend: 20,
+          track_intersection: 23,
+          track_vertical_straight_on_ground: 6,
+          track_horizontal_straight_on_ground: 31,
+          scene_ground: 33,
+          scene_backdrop: 36
         }
       }
 
