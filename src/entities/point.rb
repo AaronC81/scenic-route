@@ -6,14 +6,16 @@ module ScenicRoute
           ? [self.x - other.x, self.y - other.y]
           : [self.x <=> other.x, self.y <=> other.y]
 
-        p delta
-
         {
           [0, 1] => :north,
           [0, -1] => :south,
           [1, 0] => :west,
           [-1, 0] => :east
         }[delta]
+      end
+
+      def adjacent_to?(other)
+        heading_to(other, true) != nil
       end
     end
   end
