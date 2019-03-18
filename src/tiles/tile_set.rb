@@ -29,6 +29,8 @@ module ScenicRoute
       # @param [Hash] tile_definitions
       def initialize(images, width=nil, height=nil, tile_definitions=nil)
         @images = images
+        @width = width
+        @height = height
         @tile_definitions = tile_definitions
       end
 
