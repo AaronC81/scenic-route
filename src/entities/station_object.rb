@@ -3,12 +3,13 @@ require_relative 'tile_object'
 module ScenicRoute
   module Entities
     class StationObject < TileObject
-      attr_reader :orientation
+      attr_reader :orientation, :number
 
-      def initialize(point, orientation)
+      def initialize(point, orientation, number)
         super(point)
 
         @orientation = orientation
+        @number = number
       end
 
       def track_connectivity
