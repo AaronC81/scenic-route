@@ -41,8 +41,12 @@ module ScenicRoute
         tile_y = (mouse_point.y - origin.y) / map.tile_set.height
 
         if tile_x >= 0 && tile_x <= map.width && tile_y >= 0 && tile_y <= map.height
+          tile_point = Entities::Point.new(tile_x.to_i, tile_y.to_i)
+
           if @drawing
-            map.place_track(Entities::Point.new(tile_x.to_i, tile_y.to_i))
+            map.place_track(tile_point)
+          elsif @removing
+            map.remove_track(tile_point)
           end
 
           tile_corner_x = tile_x.to_i * map.tile_set.width + origin.x
@@ -57,12 +61,14 @@ module ScenicRoute
         super
 
         @drawing = true if id == Gosu::MsLeft
+        @removing = true if id == Gosu::MsRight
       end
 
       def button_up(id)
         super
 
         @drawing = false if id == Gosu::MsLeft
+        @removing = false if id == Gosu::MsRight
       end
     end
   end

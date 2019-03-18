@@ -62,19 +62,17 @@ module ScenicRoute
       #
       # @param [Point] point
       # @return [Boolean] True if the track piece was inserted, false otherwise.
-      #
-      # @raise [ArgumentError] If the point already exists in a route.
       def place_track(point)
         # Check bounds and valid tile
         return false if point.x < 0 || point.x >= width 
         return false if point.y < 0 || point.y >= height
         return false if layout[point.y][point.x] != :grass
 
+        # Ensure this point doesn't already exist in a route
+        return false if routes.flat_map(&:points).include?(point)
+
         inserted = false
         routes.each do |route|
-          # Ensure this point doesn't already exist in a route
-          return false if route.points.include?(point)
-
           # If this point fits at either end of an existing route, add it and
           # leave the function
           if route.points.first.adjacent_to?(point)
@@ -91,19 +89,80 @@ module ScenicRoute
         # There was no existing route to integrate the point into; create a new
         # one instead
         routes << Route.new(self, [point]) unless inserted
+        join_adjacent_routes
+        true
+      end
 
-        # If two paths ran into each other, we should join them
-        routes.each do |a|
-          routes.each do |b|
-            if a != b && a.adjacent_to?(b)
-              routes.delete(a)
-              routes.delete(b)
-              routes << a.join(b)
+      ##
+      # Removes a track piece from a specific location, adjusing routes
+      # accordingly.
+      #
+      # @param [Point] point
+      # @return [Boolean] True if the track piece was removed, false otherwise.
+      def remove_track(point)
+        # Remove the tile
+        removed = false
+        routes.each do |route|
+          # If this point was removed from either end of a route, simply trim
+          # the ends
+          if route.points.length == 1 && route.points.first == point
+            routes.delete(route)
+            removed = true
+            break
+          elsif route.points.first == point
+            route.points.delete_at(0)
+            removed = true
+            break
+          elsif route.points.last == point
+            route.points.delete_at(-1)
+            removed = true
+            break
+          elsif route.points.include?(point)
+            # If this point is on the route, but not at either end, then we
+            # need to break the route into two
+            before, after = route.points.slice_when { |x| x == point }.to_a
+            before = before[0..-2] # removed the sliced point
+            
+            routes.delete(route)
+            routes << Route.new(self, before)
+            routes << Route.new(self, after)
+
+            removed = true
+            break
+          end
+        end
+
+        return false unless removed
+        join_adjacent_routes
+        true
+      end
+
+      ##
+      # Scans through the routes on this map, consolidating ones which have
+      # adjacent ends. This is called automatically after {place_track} and
+      # {remove_track}.
+      def join_adjacent_routes
+        # The iteration must be restarted after each change for safety
+        # Use a catch/throw and a variable to keep track of whether we need
+        # to restart
+        restart_required = false
+        catch(:done) do
+          routes.each do |a|
+            routes.each do |b|
+              if a != b && a.adjacent_to?(b)
+                routes.delete(a)
+                routes.delete(b)
+                routes << a.join(b)
+
+                # Trigger a retry
+                restart_required = true
+                throw(:done)
+              end
             end
           end
         end
 
-        true
+        join_adjacent_routes if restart_required
       end
 
       ## 
