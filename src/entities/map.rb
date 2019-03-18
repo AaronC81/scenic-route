@@ -1,5 +1,6 @@
 require 'gosu'
 require_relative 'point'
+require_relative 'route'
 
 module ScenicRoute
   module Entities
@@ -36,6 +37,50 @@ module ScenicRoute
         # TODO: validate maps
         @layout = layout
         @routes = []
+      end
+
+      ##
+      # Place a track piece at a specific location, adjusing routes accordingly.
+      #
+      # @param [Point] point
+      #
+      # @raise [ArgumentError] If the point already exists in a route.
+      def place_track(point)
+        # TODO: check map bounds
+
+        inserted = false
+        routes.each do |route|
+          # Ensure this point doesn't already exist in a route
+          raise ArgumentError, 'point already exists' \
+            if route.points.include?(point)
+
+          # If this point fits at either end of an existing route, add it and
+          # leave the function
+          if route.points.first.adjacent_to?(point)
+            route.points.insert(0, point)
+            inserted = true
+            break
+          elsif route.points.last.adjacent_to?(point)
+            route.points << point
+            inserted = true
+            break
+          end
+        end
+
+        # There was no existing route to integrate the point into; create a new
+        # one instead
+        routes << Route.new(self, [point]) unless inserted
+
+        # If two paths ran into each other, we should join them
+        routes.each do |a|
+          routes.each do |b|
+            if a != b && a.adjacent_to?(b)
+              routes.delete(a)
+              routes.delete(b)
+              routes << a.join(b)
+            end
+          end
+        end
       end
 
       ## 
