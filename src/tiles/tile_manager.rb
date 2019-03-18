@@ -31,7 +31,8 @@ module ScenicRoute
           object_station_north: 10,
           object_station_east: 11,
           object_station_west: 12,
-          placeholder: 13
+          placeholder: 13,
+          object_landmark_statue: 14
         }
       }
 

@@ -23,7 +23,8 @@ module ScenicRoute
         :object_station_south,
         :object_station_north,
         :object_station_east,
-        :object_station_west
+        :object_station_west,
+        :object_landmark_statue
       ]
 
       REQUIRED_SYMBOLS.each do |sym|
