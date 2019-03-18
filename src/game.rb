@@ -5,7 +5,7 @@ require_relative 'entities/route'
 require_relative 'entities/point'
 require_relative 'ui/map_controller'
 require_relative 'ui/controller_supervisor'
-require_relative 'io/layout_loader'
+require_relative 'io/map_loader'
 
 module ScenicRoute
   class Game < Gosu::Window
@@ -15,8 +15,7 @@ module ScenicRoute
       UI::ControllerSupervisor.window = self
 
       UI::MapController.new(
-        Entities::Map.new(IO::LayoutLoader.load_layout('res/layout/test.srlay'),
-          Tiles::TileManager.tile_set(:world)),
+        IO::MapLoader.load_map('res/layout/test.srlay', Tiles::TileManager.tile_set(:world)),
         Entities::Point.new(0, 0)
       )
     end 
