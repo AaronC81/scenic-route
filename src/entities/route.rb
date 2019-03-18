@@ -83,6 +83,25 @@ module ScenicRoute
 
           result[curr_pt] = tile_for_heading_delta(direction_in, direction_out)
         end
+        
+        # Handle the special case that the end of this route is next to an 
+        # object which can connect to a track.
+        # This is merely a cosmetic alteration.
+        map.tile_objects.each do |object|
+          if object.track_connectivity[object.point.heading_to(points.first, true)]
+            result[points.first] = tile_for_heading_delta(
+              object.point.heading_to(points.first, true),
+              points.first.heading_to(points[1])
+            )
+          end
+
+          if object.track_connectivity[object.point.heading_to(points.last, true)]
+            result[points.last] = tile_for_heading_delta(
+              object.point.heading_to(points.last, true),
+              points.last.heading_to(points[-2])
+            )
+          end
+        end
 
         result
       end
