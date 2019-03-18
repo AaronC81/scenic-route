@@ -20,10 +20,7 @@ module ScenicRoute
 
         a, b = stations
         map.routes.each do |route|
-          f, l = route.points.first, route.points.last
-          # TODO: that conditional physically hurts
-          if (a.point.heading_to(f) == a.orientation && b.point.heading_to(l) == b.orientation) \
-            || (a.point.heading_to(l) == a.orientation && b.point.heading_to(f) == b.orientation)
+          if route.connects?(a.point.moved(a.orientation), b.point.moved(b.orientation))
             # This route links the two stations
             # Our score is its length
 
