@@ -6,4 +6,5 @@
 .....#.###.###.....
 ...................
 ---
-StationObject 2,2 :east
+StationObject 2,2 :east 1
+StationObject 16,4 :north 1
