@@ -65,7 +65,10 @@ module ScenicRoute
       #
       # @raise [ArgumentError] If the point already exists in a route.
       def place_track(point)
-        # TODO: check map bounds
+        # Check bounds and valid tile
+        return false if point.x < 0 || point.x >= width 
+        return false if point.y < 0 || point.y >= height
+        return false if layout[point.y][point.x] != :grass
 
         inserted = false
         routes.each do |route|
