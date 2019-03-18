@@ -1,4 +1,5 @@
 require_relative 'controller_supervisor'
+require_relative '../entities/point'
 
 module ScenicRoute
   module UI
@@ -11,6 +12,13 @@ module ScenicRoute
       # so that it receives events.
       def initialize
         ControllerSupervisor.register(self)
+      end
+
+      def mouse_point
+        Entities::Point.new(
+          ControllerSupervisor.window.mouse_x,
+          ControllerSupervisor.window.mouse_y
+        )
       end
 
       ##
@@ -27,7 +35,7 @@ module ScenicRoute
       ##
       # An event handler called when {Gosu::Window#button_down} is called with
       # a mouse ID.
-      def mouse_down(id, mouse_point)
+      def mouse_down(id)
       end
 
       ##
@@ -39,7 +47,7 @@ module ScenicRoute
       ##
       # An event handler called when {Gosu::Window#button_up} is called with
       # a mouse ID.
-      def mouse_up(id, mouse_point)
+      def mouse_up(id)
       end
     end
   end
