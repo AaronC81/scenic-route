@@ -10,6 +10,7 @@ require_relative 'entities/station_object'
 require_relative 'gameplay/scoring'
 require_relative 'entities/landmark_object'
 require_relative 'ui/background_controller'
+require_relative 'ui/hud_controller'
 
 module ScenicRoute
   class Game < Gosu::Window
@@ -34,6 +35,7 @@ module ScenicRoute
       )
 
       UI::BackgroundController.new
+      UI::HudController.new(map)
     end 
 
     def draw
