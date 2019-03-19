@@ -63,6 +63,18 @@ module ScenicRoute
       end
 
       ##
+      # @return [Numeric] The pixel width of this map.
+      def pixel_width
+        width * tile_set.width
+      end
+
+      ##
+      # @return [Numeric] The pixel height of this map.
+      def pixel_height
+        height * tile_set.height
+      end
+
+      ##
       # Place a track piece at a specific location, adjusing routes accordingly.
       #
       # @param [Point] point
