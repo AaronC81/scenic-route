@@ -9,6 +9,7 @@ require_relative 'io/map_loader'
 require_relative 'entities/station_object'
 require_relative 'gameplay/scoring'
 require_relative 'entities/landmark_object'
+require_relative 'ui/background_controller'
 
 module ScenicRoute
   class Game < Gosu::Window
@@ -31,6 +32,8 @@ module ScenicRoute
           (HEIGHT - map.pixel_height) / 2
         )
       )
+
+      UI::BackgroundController.new
     end 
 
     def draw
