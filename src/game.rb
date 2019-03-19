@@ -12,8 +12,11 @@ require_relative 'entities/landmark_object'
 
 module ScenicRoute
   class Game < Gosu::Window
+    WIDTH = 1280
+    HEIGHT = 720
+
     def initialize
-      super 1280, 720
+      super WIDTH, HEIGHT
       
       UI::ControllerSupervisor.window = self
 
