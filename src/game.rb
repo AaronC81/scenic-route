@@ -15,6 +15,8 @@ module ScenicRoute
     WIDTH = 1280
     HEIGHT = 720
 
+    attr_reader :map
+
     def initialize
       super WIDTH, HEIGHT
       
@@ -23,8 +25,11 @@ module ScenicRoute
       @map = IO::MapLoader.load_map('res/layout/test.srlay', Tiles::TileManager.tile_set(:world))
 
       UI::MapController.new(
-        @map,
-        Entities::Point.new(0, 0)
+        map,
+        Entities::Point.new(
+          (WIDTH - map.pixel_width) / 2,
+          (HEIGHT - map.pixel_height) / 2
+        )
       )
     end 
 
