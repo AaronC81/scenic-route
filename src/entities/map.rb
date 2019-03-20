@@ -79,13 +79,13 @@ module ScenicRoute
 
         inserted = false
         routes.each do |route|
-          # If this point fits at either end of an existing route, add it and
-          # leave the function
-          if route.points.first.adjacent_to?(point)
+          # If this point fits at either end of an existing route and is not
+          # complete, add it and leave the function
+          if !route.complete? && route.points.first.adjacent_to?(point)
             route.points.insert(0, point)
             inserted = true
             break
-          elsif route.points.last.adjacent_to?(point)
+          elsif !route.complete? && route.points.last.adjacent_to?(point)
             route.points << point
             inserted = true
             break
@@ -178,7 +178,7 @@ module ScenicRoute
         catch(:done) do
           routes.each do |a|
             routes.each do |b|
-              if a != b && a.adjacent_to?(b)
+              if a != b && a.adjacent_to?(b) && !a.complete? && !b.complete?
                 routes.delete(a)
                 routes.delete(b)
                 routes << a.join(b)
