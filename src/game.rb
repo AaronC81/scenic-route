@@ -34,7 +34,7 @@ module ScenicRoute
         )
       )
 
-      UI::BackgroundController.new
+      UI::BackgroundController.new(map)
       UI::HudController.new(map)
     end 
 
