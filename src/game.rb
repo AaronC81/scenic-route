@@ -42,6 +42,10 @@ module ScenicRoute
       UI::ControllerSupervisor.dispatch(:draw)
     end
 
+    def update
+      UI::ControllerSupervisor.dispatch(:update)
+    end
+
     def button_down(id)
       UI::ControllerSupervisor.dispatch(:button_down, id)
     end
