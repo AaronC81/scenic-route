@@ -23,8 +23,15 @@ module ScenicRoute
       attr_reader :tile_set
 
       ##
-      # @return [Array<TileObject>] The tile objects on this map.
-      attr_reader :tile_objects
+      # @param [Class] clazz The kind of tile object to return. Matches all if
+      #   left as default (nil). If any value is used other than nil, the 
+      #   return array should NOT be modified.
+      #
+      # @return [Array<TileObject>] The tile objects on this map matching the
+      #   given class.
+      def tile_objects(clazz=nil)
+        clazz.nil? ? @tile_objects : @tile_objects.select { |o| o.is_a?(clazz) }
+      end
 
       ## 
       # Create a new map.
