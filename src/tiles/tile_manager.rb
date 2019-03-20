@@ -10,6 +10,8 @@ module ScenicRoute
       ##
       # A mapping of known tile set names to their filepaths and tile sizes.
       # TODO: want buffers on new station graphic track
+      # TODO: make everything look less obviously looping, maybe randomly
+      # generate/rotate textures or something idk
       TILE_SET_NAMES = {
         world: [WorldTileSet, 'res/img/world.png', 64, 64]
       }

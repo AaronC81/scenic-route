@@ -14,6 +14,7 @@ module ScenicRoute
       # @return [Numeric?] The score, or nil if there is no station route.
       def self.score_for_map(map)
         # TODO: currently only supports one station pair
+        # TODO: doesn't actually return nil on no station route
         stations = map.tile_objects.select { |x| x.is_a?(Entities::StationObject) }
         landmarks = map.tile_objects.select { |x| x.is_a?(Entities::LandmarkObject) }
         raise 'too many stations, unimplemented' unless stations.length == 2
