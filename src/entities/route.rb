@@ -158,6 +158,24 @@ module ScenicRoute
         (points.first == a && points.last == b) \
           || (points.last == a && points.first == b)
       end
+
+      ##
+      # Returns a boolean indicating if this route is a complete route between a
+      # pair of matching stations.
+      #
+      # @return [Boolean]
+      def complete?
+        stations = map.tile_objects.select { |x| x.is_a?(Entities::StationObject) }
+        station_pairs = stations.group_by(&:number)
+
+        station_pairs.each do |_, (a, b)|
+          if connects?(a.point.moved(a.orientation), b.point.moved(b.orientation))
+            return true
+          end
+        end
+
+        false
+      end
     end
   end
 end
