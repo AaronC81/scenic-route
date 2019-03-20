@@ -155,25 +155,26 @@ module ScenicRoute
       end
 
       ##
-      # Retrives the top-level tile at a given tile point. If there is an object
-      # or a track at a point, that is returned, otherwise the layout tile is 
-      # returned.
+      # Retrives the tiles at a given tile point, with the tiles which should
+      # be drawn with a lower Z first.
       #
       # @param [Point] point The point to return a tile for.
       #
-      # @return [Symbol] A tile name.
-      def tile_at(point)
+      # @return [Array<Symbol>] An ordered array of tile names.
+      def tiles_at(point)
         # TODO: Memoise these?
         route_tile_maps = routes.map(&:to_tile_hash).reduce(&:merge) || {}
         tile_object_maps = tile_objects.map { |o| [o.point, o] }.to_h
 
+        names = [layout[point.y][point.x]]
+
         if route_tile_maps[point]
-          route_tile_maps[point]
+          names << route_tile_maps[point]
         elsif tile_object_maps[point]
-          tile_object_maps[point].tile_name
-        else
-          layout[point.y][point.x]
+          names << tile_object_maps[point].tile_name          
         end
+
+        names
       end
 
       ##
@@ -209,16 +210,19 @@ module ScenicRoute
       #
       # @param [Numeric] start_x The x position at which to start the map.
       # @param [Numeric] start_y The y position at which to start the map.
-      # @param [Numeric] z The z position at which to draw the map.
+      # @param [Numeric] z The z position at which to draw the map's base.
       def draw(start_x, start_y, z)
         tile_set = Tiles::TileManager.tile_set(:world)
 
         width.times do |mx|
           height.times do |my|
-            this_tile = tile_at(Point.new(mx, my))
+            this_tile_names = tiles_at(Point.new(mx, my))
             this_tile_x = tile_set.width * mx + start_x
             this_tile_y = tile_set.height * my + start_y
-            tile_set.tile(this_tile).draw(this_tile_x, this_tile_y, z)
+
+            this_tile_names.each.with_index do |tile, i|
+              tile_set.tile(tile).draw(this_tile_x, this_tile_y, z + i)
+            end
           end
         end
       end
