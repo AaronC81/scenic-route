@@ -31,6 +31,12 @@ module ScenicRoute
       def self.dispatch(method_name, *args)
         @@controllers.map { |c| c.send(method_name, *args) }
       end
+
+      def self.controller(type)
+        matching = @@controllers.select { |x| x.is_a?(type) }
+        raise 'not one controller of this type' if matching.length != 1
+        matching.first
+      end
     end
   end
 end
