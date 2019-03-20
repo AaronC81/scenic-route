@@ -34,8 +34,6 @@ module ScenicRoute
         @score_font.draw_text(@previous_valid_score,
           50, 50, 1, 1.0, 1.0,
           this_score_valid ? Gosu::Color::BLACK : Gosu::Color::GRAY)
-
-        p @previous_valid_score
       end
     end
   end
