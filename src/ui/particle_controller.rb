@@ -1,3 +1,5 @@
+require_relative 'controller'
+
 module ScenicRoute
   module UI
     class ParticleController < Controller
