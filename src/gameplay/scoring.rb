@@ -24,12 +24,8 @@ module ScenicRoute
               b.point.moved(b.orientation)) ? score_for_route(route) : nil
           end.compact
 
-          p [num, scores]
-
           [num, scores.one? ? scores.first : nil]
         end.to_h
-
-        p scores_for_pairs
 
         scores_for_pairs.values.all? ? scores_for_pairs.values.min : nil
       end
