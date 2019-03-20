@@ -23,6 +23,10 @@ module ScenicRoute
       attr_reader :tile_set
 
       ##
+      # @return [UI::MapController] The controller which is drawing this map.
+      attr_accessor :controller
+
+      ##
       # @param [Class] clazz The kind of tile object to return. Matches all if
       #   left as default (nil). If any value is used other than nil, the 
       #   return array should NOT be modified.

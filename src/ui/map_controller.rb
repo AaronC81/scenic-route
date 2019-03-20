@@ -25,6 +25,7 @@ module ScenicRoute
         super()
 
         @map = map
+        map.controller = self
         @origin = origin
         @drawing = false
         @removing = false
