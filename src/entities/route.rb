@@ -1,3 +1,6 @@
+require_relative '../ui/controller_supervisor'
+require_relative '../ui/particle_controller'
+
 module ScenicRoute
   module Entities
     ##
@@ -175,6 +178,23 @@ module ScenicRoute
         end
 
         false
+      end
+
+      def sparkle
+        img = Gosu::Image.new('res/img/sparkle.png')
+
+        points.each do |point|
+          x = map.controller.origin.x + point.x * map.tile_set.width + rand(map.tile_set.width)
+          y = map.controller.origin.y + point.y * map.tile_set.height + rand(map.tile_set.height)
+
+          3.times do
+            UI::ControllerSupervisor.controller(UI::ParticleController).spawn(
+              Entities::Particle.new(
+                Entities::Point.new(x, y), img, -50..50, -50..50, 0, 0, 0.5, 1
+              )
+            )
+          end
+        end
       end
     end
   end

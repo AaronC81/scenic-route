@@ -95,10 +95,12 @@ module ScenicRoute
           if !route.complete? && route.points.first.adjacent_to?(point)
             route.points.insert(0, point)
             inserted = true
+            route.sparkle if route.complete?
             break
           elsif !route.complete? && route.points.last.adjacent_to?(point)
             route.points << point
             inserted = true
+            route.sparkle if route.complete?
             break
           end
         end
@@ -192,7 +194,9 @@ module ScenicRoute
               if a != b && a.adjacent_to?(b) && !a.complete? && !b.complete?
                 routes.delete(a)
                 routes.delete(b)
-                routes << a.join(b)
+                new_route = a.join(b)
+                routes << new_route
+                new_route.sparkle if new_route.complete?
 
                 # Trigger a retry
                 restart_required = true
