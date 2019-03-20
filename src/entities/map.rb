@@ -8,17 +8,6 @@ module ScenicRoute
     # Represents a game map with routes drawn over it.
     class Map
       ##
-      # An example map to demonstrate the layout required.
-      EXAMPLE_MAP = [
-        %I{scene_backdrop scene_backdrop scene_backdrop scene_backdrop scene_backdrop scene_backdrop scene_backdrop scene_backdrop},
-        %I{scene_backdrop scene_backdrop scene_ground scene_ground scene_ground scene_ground scene_backdrop scene_backdrop},
-        %I{scene_backdrop scene_ground scene_ground scene_ground scene_ground scene_ground scene_backdrop scene_backdrop},
-        %I{scene_backdrop scene_backdrop scene_ground scene_ground scene_backdrop scene_ground scene_backdrop scene_backdrop},
-        %I{scene_backdrop scene_backdrop scene_ground scene_backdrop scene_backdrop scene_ground scene_ground scene_backdrop},
-        %I{scene_backdrop scene_backdrop scene_backdrop scene_backdrop scene_backdrop scene_backdrop scene_backdrop scene_backdrop}
-      ]
-
-      ##
       # @return [Array<Array<Symbol>>] A 2D array (row, col) of this map's 
       #   fixed layout, where each element is a tile name. This does not change
       #   as routes are drawn; elements are replaced with tracks when the map is
