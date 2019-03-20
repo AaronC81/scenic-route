@@ -51,7 +51,7 @@ module ScenicRoute
       end
 
       def inspect
-        puts "#<TileSet: #{images.length} images, #{tile_definitions&.length} defs>"
+        "#<TileSet: #{images.length} images, #{tile_definitions&.length} defs>"
       end
     end
   end
