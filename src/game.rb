@@ -11,11 +11,14 @@ require_relative 'gameplay/scoring'
 require_relative 'entities/landmark_object'
 require_relative 'ui/background_controller'
 require_relative 'ui/hud_controller'
+require_relative 'ui/particle_controller'
+require_relative 'entities/particle'
 
 module ScenicRoute
   class Game < Gosu::Window
     WIDTH = 1280
     HEIGHT = 720
+    FPS = 60
 
     attr_reader :map
 
@@ -36,6 +39,7 @@ module ScenicRoute
 
       UI::BackgroundController.new(map)
       UI::HudController.new(map)
+      UI::ParticleController.new
     end 
 
     def draw
