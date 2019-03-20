@@ -9,8 +9,9 @@ module ScenicRoute
     class TileManager
       ##
       # A mapping of known tile set names to their filepaths and tile sizes.
+      # TODO: want buffers on new station graphic track
       TILE_SET_NAMES = {
-        world: [WorldTileSet, 'res/world.png', 64, 64]
+        world: [WorldTileSet, 'res/img/world.png', 64, 64]
       }
 
       ##
