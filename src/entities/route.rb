@@ -184,10 +184,13 @@ module ScenicRoute
         img = Gosu::Image.new('res/img/sparkle.png')
 
         points.each do |point|
-          x = map.controller.origin.x + point.x * map.tile_set.width + rand(map.tile_set.width)
-          y = map.controller.origin.y + point.y * map.tile_set.height + rand(map.tile_set.height)
+          base_x = map.controller.origin.x + point.x * map.tile_set.width
+          base_y = map.controller.origin.y + point.y * map.tile_set.height
 
           3.times do
+            x = base_x + rand(map.tile_set.width)
+            y = base_y + rand(map.tile_set.height)
+
             UI::ControllerSupervisor.controller(UI::ParticleController).spawn(
               Entities::Particle.new(
                 Entities::Point.new(x, y), img, -50..50, -50..50, -360..360, -360..360, 0.5, 1
