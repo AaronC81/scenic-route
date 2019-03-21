@@ -190,7 +190,7 @@ module ScenicRoute
           3.times do
             UI::ControllerSupervisor.controller(UI::ParticleController).spawn(
               Entities::Particle.new(
-                Entities::Point.new(x, y), img, -50..50, -50..50, 0, 0, 0.5, 1
+                Entities::Point.new(x, y), img, -50..50, -50..50, -360..360, -360..360, 0.5, 1
               )
             )
           end
