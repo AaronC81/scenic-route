@@ -15,25 +15,41 @@ module ScenicRoute
         super()
 
         @map = map
-        @previous_valid_score = 0
+        @previous_valid_total_score = 0
+        @previous_valid_scores = Hash.new(0)
       end
 
       def init_fonts
         @score_font ||= Gosu::Font.new(ControllerSupervisor.window, LAPSUS_PRO, 70)
-        @label_font ||= Gosu::Font.new(ControllerSupervisor.window, LAPSUS_PRO, 30)
+        @heading_font ||= Gosu::Font.new(ControllerSupervisor.window, LAPSUS_PRO, 30)
+        @mini_font ||= Gosu::Font.new(ControllerSupervisor.window, LAPSUS_PRO, 25)
       end
 
       def draw
         init_fonts
 
-        this_score = Gameplay::Scoring.score_for_map(map)
-        this_score_valid = !this_score.nil? && this_score != 0
-        @previous_valid_score = this_score if this_score_valid
+        # Draw overall score
+        scores = Gameplay::Scoring.scores_for_map(map)
+        @previous_valid_total_score = scores.values.min if scores.values.all?
 
-        @label_font.draw_text('SCORE', 50, 18, 1, 1.0, 1.0, Gosu::Color::BLACK)
-        @score_font.draw_text(@previous_valid_score,
+        @heading_font.draw_text('SCORE', 50, 18, 1, 1.0, 1.0, Gosu::Color::BLACK)
+        @score_font.draw_text(@previous_valid_total_score,
           50, 50, 1, 1.0, 1.0,
-          this_score_valid ? Gosu::Color::BLACK : Gosu::Color::GRAY)
+          scores.values.all? ? Gosu::Color::BLACK : Gosu::Color::GRAY)
+
+        # Draw individual station scores
+        scores.each.with_index do |(station, score), i|
+          Gosu.draw_rect(i * 50 + 150, 50, 40, 40,
+            Entities::StationObject::BACKGROUND_COLORS[station], 10)
+
+          @previous_valid_scores[station] = score unless score.nil?
+
+          @mini_font.draw_text_rel(@previous_valid_scores[station],
+            i * 50 + 170, 70, 10, 0.5, 0.5,
+            1, 1, !score.nil? \
+              ? Entities::StationObject::TEXT_COLORS[station]
+              : Entities::StationObject::INACTIVE_TEXT_COLORS[station])
+        end
       end
     end
   end

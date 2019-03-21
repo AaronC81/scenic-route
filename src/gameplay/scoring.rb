@@ -12,13 +12,14 @@ module ScenicRoute
       #
       # @param [Entities::Map] map The map to calculate a score for.
       # 
-      # @return [Numeric?] The score, or nil if there is no station route.
-      def self.score_for_map(map)
+      # @return [Hash<Numeric?>] The scores for each pair, or nil if there is
+      # no station route.
+      def self.scores_for_map(map)
         stations = map.tile_objects(Entities::StationObject)
 
         station_pairs = stations.group_by(&:number)
 
-        scores_for_pairs = station_pairs.map do |num, (a, b)|
+        station_pairs.map do |num, (a, b)|
           scores = map.routes.map do |route|
             route.connects?(a.point.moved(a.orientation),
               b.point.moved(b.orientation)) ? score_for_route(route) : nil
@@ -26,8 +27,6 @@ module ScenicRoute
 
           [num, scores.one? ? scores.first : nil]
         end.to_h
-
-        scores_for_pairs.values.all? ? scores_for_pairs.values.min : nil
       end
 
       ## 

@@ -4,13 +4,18 @@ module ScenicRoute
   module Entities
     class StationObject < TileObject
       BACKGROUND_COLORS = {
-        1: 0xFF0000FF,
-        2: 0xFFFF0000
+        1 => 0xFF0000FF,
+        2 => 0xFFFF0000
       }
 
       TEXT_COLORS = {
-        1: 0xFFFFFFFF
-        2: 0xFFFFFFFF
+        1 => 0xFFFFFFFF,
+        2 => 0xFFFFFFFF
+      }
+
+      INACTIVE_TEXT_COLORS = {
+        1 => 0xFF808080,
+        2 => 0xFF808080
       }
 
       attr_reader :orientation, :number
