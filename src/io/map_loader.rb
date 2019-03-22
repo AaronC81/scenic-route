@@ -29,6 +29,19 @@ module ScenicRoute
         ?b => :scene_concave_south_east,
         ?c => :scene_concave_south_west,
         ?d => :scene_concave_north_west,
+
+        ?E => :scene_groove_begin_north,
+        ?F => :scene_groove_begin_east,
+        ?G => :scene_groove_begin_south,
+        ?H => :scene_groove_begin_west,
+
+        ?e => :scene_groove_end_north,
+        ?f => :scene_groove_end_east,
+        ?g => :scene_groove_end_south,
+        ?h => :scene_groove_end_west,
+
+        ?i => :scene_groove_horizontal,
+        ?j => :scene_groove_vertical
       }
 
       ##
