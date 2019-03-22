@@ -25,6 +25,10 @@ module ScenicRoute
       ##
       # @return [UI::MapController] The controller which is drawing this map.
       attr_accessor :controller
+      
+      ##
+      # @return [UI::MapMetadata] The metadata for this map.
+      attr_accessor :metadata
 
       ##
       # @param [Class] clazz The kind of tile object to return. Matches all if

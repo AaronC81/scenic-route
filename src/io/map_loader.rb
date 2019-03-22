@@ -1,4 +1,5 @@
-require_relative "../entities/map"
+require_relative '../entities/map'
+require_relative 'map_metadata'
 
 module ScenicRoute
   module IO
@@ -65,10 +66,12 @@ module ScenicRoute
 
       def self.load_map(filename, tile_set)
         contents = File.read(filename)
-        layout_str, objects_str = contents.split("\n---\n")
+        name, medal_thresholds_str, layout_str, objects_str = contents.split("\n---\n")
 
         map = Entities::Map.new(convert_layout(layout_str), tile_set)
         map.tile_objects.append(*convert_objects(objects_str))
+        map.metadata = MapMetadata.new(name,
+          medal_thresholds_str.split.map(&:to_i))
 
         map
       end
