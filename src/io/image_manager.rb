@@ -4,7 +4,7 @@ module ScenicRoute
   module IO
     class ImageManager
       IMAGE_PATHS = {
-        particle_sparkle: 'res/img/sparkle.png'
+        particle_sparkle: 'res/img/particles/sparkle.png'
       }
 
       def self.image(name)
