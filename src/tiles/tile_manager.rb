@@ -9,9 +9,7 @@ module ScenicRoute
     class TileManager
       ##
       # A mapping of known tile set names to their filepaths and tile sizes.
-      # TODO: want buffers on new station graphic track
-      # TODO: make everything look less obviously looping, maybe randomly
-      # generate/rotate textures or something idk
+      # TODO: animate water
       TILE_SET_NAMES = {
         world: [WorldTileSet, 'res/img/world.png', 64, 64]
       }
@@ -35,7 +33,15 @@ module ScenicRoute
           object_station_east: 11,
           object_station_west: 12,
           placeholder: 13,
-          object_landmark_statue: 14
+          object_landmark_statue: 14,
+          scene_edge_north: 15,
+          scene_edge_south: 16,
+          scene_corner_north_east: 17,
+          scene_corner_north_west: 18,
+          scene_edge_east: 19,
+          scene_edge_west: 20,
+          scene_corner_south_east: 21,
+          scene_corner_south_west: 22
         }
       }
 

@@ -24,7 +24,15 @@ module ScenicRoute
         :object_station_north,
         :object_station_east,
         :object_station_west,
-        :object_landmark_statue
+        :object_landmark_statue,
+        :scene_edge_north,
+        :scene_edge_south,
+        :scene_corner_north_east,
+        :scene_corner_north_west,
+        :scene_edge_east,
+        :scene_edge_west,
+        :scene_corner_south_east,
+        :scene_corner_south_west
       ]
 
       REQUIRED_SYMBOLS.each do |sym|
