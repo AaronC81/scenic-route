@@ -37,7 +37,17 @@ module ScenicRoute
         :scene_concave_north_west,
         :scene_concave_south_east,
         :scene_concave_south_west,
-        :object_obstacle_tree
+        :object_obstacle_tree,
+        :scene_groove_begin_east,
+        :scene_groove_begin_west,
+        :scene_groove_horizontal,
+        :scene_groove_end_west,
+        :scene_groove_end_east,
+        :scene_groove_begin_north,
+        :scene_groove_begin_south,
+        :scene_groove_vertical,
+        :scene_groove_end_south,
+        :scene_groove_end_north
       ]
 
       REQUIRED_SYMBOLS.each do |sym|
