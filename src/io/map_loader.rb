@@ -10,7 +10,11 @@ module ScenicRoute
       # represent.
       CHAR_LOOKUP = {
         ?# => :scene_ground,
-        ?. => :scene_backdrop
+        ?. => :scene_backdrop,
+        ?^ => :scene_edge_north,
+        ?_ => :scene_edge_south,
+        ?> => :scene_edge_east,
+        ?< => :scene_edge_west,
       }
 
       ##
