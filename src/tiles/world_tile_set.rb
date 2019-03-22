@@ -32,7 +32,11 @@ module ScenicRoute
         :scene_edge_east,
         :scene_edge_west,
         :scene_corner_south_east,
-        :scene_corner_south_west
+        :scene_corner_south_west,
+        :scene_concave_north_east,
+        :scene_concave_north_west,
+        :scene_concave_south_east,
+        :scene_concave_south_west
       ]
 
       REQUIRED_SYMBOLS.each do |sym|

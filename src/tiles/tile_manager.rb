@@ -41,7 +41,11 @@ module ScenicRoute
           scene_edge_east: 19,
           scene_edge_west: 20,
           scene_corner_south_east: 21,
-          scene_corner_south_west: 22
+          scene_corner_south_west: 22, 
+          scene_concave_north_east: 23,
+          scene_concave_north_west: 24,
+          scene_concave_south_east: 25,
+          scene_concave_south_west: 26
         }
       }
 
