@@ -45,7 +45,8 @@ module ScenicRoute
           scene_concave_north_east: 23,
           scene_concave_north_west: 24,
           scene_concave_south_east: 25,
-          scene_concave_south_west: 26
+          scene_concave_south_west: 26,
+          object_obstacle_tree: 27
         }
       }
 

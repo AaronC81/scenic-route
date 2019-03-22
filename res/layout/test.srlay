@@ -3,11 +3,12 @@ D^^d#####a^d#####aA
 <#################>
 Cc################>
 .C__c############bB
-DA..<#.###.###.##>.
-CB..C_.___.___.__B..
+....<#.###.###.##>.
+....C_.___.___.__B..
 ---
 StationObject 2,2 :east 1
 StationObject 16,5 :north 1
 StationObject 14,1 :south 2
 StationObject 17,2 :west 2
 LandmarkObject 5,3 :statue
+ObstacleObject 6,3 :tree

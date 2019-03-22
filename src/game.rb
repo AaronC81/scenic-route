@@ -13,6 +13,7 @@ require_relative 'ui/background_controller'
 require_relative 'ui/hud_controller'
 require_relative 'ui/particle_controller'
 require_relative 'entities/particle'
+require_relative 'entities/obstacle_object'
 
 module ScenicRoute
   class Game < Gosu::Window
