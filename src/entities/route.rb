@@ -1,5 +1,6 @@
 require_relative '../ui/controller_supervisor'
 require_relative '../ui/particle_controller'
+require_relative '../io/image_manager'
 
 module ScenicRoute
   module Entities
@@ -181,7 +182,7 @@ module ScenicRoute
       end
 
       def sparkle
-        img = Gosu::Image.new('res/img/sparkle.png')
+        img = IO::ImageManager.image(:particle_sparkle)
 
         points.each do |point|
           base_x = map.controller.origin.x + point.x * map.tile_set.width
