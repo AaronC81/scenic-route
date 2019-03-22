@@ -15,6 +15,19 @@ module ScenicRoute
         ?_ => :scene_edge_south,
         ?> => :scene_edge_east,
         ?< => :scene_edge_west,
+
+        # D|A
+        # ---
+        # C|B
+        ?A => :scene_corner_north_east,
+        ?B => :scene_corner_south_east,
+        ?C => :scene_corner_south_west,
+        ?D => :scene_corner_north_west,
+
+        ?a => :scene_concave_north_east,
+        ?b => :scene_concave_south_east,
+        ?c => :scene_concave_south_west,
+        ?d => :scene_concave_north_west,
       }
 
       ##
