@@ -17,6 +17,11 @@ module ScenicRoute
       attr_reader :origin
 
       ##
+      # Whether or not events should register on the map.
+      attr_accessor :controls_enabled
+      alias controls_enabled? controls_enabled
+
+      ##
       # Create a new map controller.
       # 
       # @param [Entities::Map] map
@@ -29,6 +34,7 @@ module ScenicRoute
         @origin = origin
         @drawing = false
         @removing = false
+        @controls_enabled = true
       end
 
       ##
@@ -54,13 +60,15 @@ module ScenicRoute
           tile_corner_x = tile_x.to_i * map.tile_set.width + origin.x
           tile_corner_y = tile_y.to_i * map.tile_set.height + origin.y
         
+          # TODO Colour based on validity
           Gosu.draw_rect(tile_corner_x, tile_corner_y, map.tile_set.width,
-            map.tile_set.height, 0x77FFFF00, 10) # TODO Colour based on validity
+            map.tile_set.height, 0x77FFFF00, 10) if controls_enabled? 
         end
       end
 
       def button_down(id)
         super
+        return unless controls_enabled?
 
         @drawing = true if id == Gosu::MsLeft
         @removing = true if id == Gosu::MsRight
@@ -68,6 +76,7 @@ module ScenicRoute
 
       def button_up(id)
         super
+        return unless controls_enabled?
 
         @drawing = false if id == Gosu::MsLeft
         @removing = false if id == Gosu::MsRight

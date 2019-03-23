@@ -25,6 +25,8 @@ module ScenicRoute
       def draw
         return if dialogue_queue.empty?
 
+        ControllerSupervisor.controller(MapController).controls_enabled = false
+
         # Dim background
         Gosu.draw_rect(0, 0, Game::WIDTH, Game::HEIGHT, 0xBB000000, 20)
         
@@ -65,6 +67,9 @@ module ScenicRoute
         @current_index_tick_counter = 0
         @character_bob_tick_counter = 0
         @character_bob = false
+
+        ControllerSupervisor.controller(MapController).controls_enabled = true \
+          if @dialogue_queue.empty?
       end
 
       def current_done?
