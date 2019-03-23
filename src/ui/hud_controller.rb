@@ -22,6 +22,7 @@ module ScenicRoute
       end
 
       def init_fonts
+        # TODO: FontManager?
         @score_font ||= Gosu::Font.new(ControllerSupervisor.window, SILKSCREEN, 70)
         @heading_font ||= Gosu::Font.new(ControllerSupervisor.window, SILKSCREEN, 30)
         @mini_font ||= Gosu::Font.new(ControllerSupervisor.window, SILKSCREEN, 25)

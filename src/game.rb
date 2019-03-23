@@ -44,7 +44,13 @@ module ScenicRoute
       UI::BackgroundController.new(map)
       UI::HudController.new(map)
       UI::ParticleController.new
-      UI::DialogueController.new.dialogue_queue << "This is some text.\nIt could be pretty long. Woo!"
+      UI::DialogueController.new.dialogue_queue = ["Welcome to Scenic Route!",
+        "You'll be started building\ntracks in no time.",
+        "In each level, you must build\nthe longest track you can.",
+        "Our passengers want to see\nall the island has to offer!",
+        "Use the left mouse button to\ndraw tracks.",
+        "The right mouse button erases\ntracks if you make a mistake.",
+        "Draw a track along the island\nto connect the stations."]
     end 
 
     def draw
