@@ -11,7 +11,8 @@ module ScenicRoute
         medal_none: 'res/img/medals/none.png',
         dialogue_conductor: 'res/img/conductor.png',
         mouse_left_click: 'res/img/mouse_left_click.png',
-        mouse: 'res/img/mouse.png'
+        mouse: 'res/img/mouse.png',
+        dialogue_background: 'res/img/dialogue_background.png'
       }
 
       def self.image(name)

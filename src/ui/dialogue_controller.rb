@@ -38,7 +38,8 @@ module ScenicRoute
           Game::HEIGHT - conductor_image.height + (@character_bob ? 7 : 0), 20) 
 
         # Draw the text background
-        Gosu.draw_rect(Game::WIDTH / 2 - 300, Game::HEIGHT - 180, 600, 100, 0xFFFFFFFF, 20)
+        background_image = IO::ImageManager.image(:dialogue_background)
+        background_image.draw(Game::WIDTH / 2 - 300, Game::HEIGHT - 180, 20)
 
         # Draw the text
         Gosu::Font.new(ControllerSupervisor.window, 'res/font/Silkscreen.ttf', 30).draw_text(
