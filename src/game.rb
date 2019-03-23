@@ -14,10 +14,11 @@ require_relative 'ui/hud_controller'
 require_relative 'ui/particle_controller'
 require_relative 'entities/particle'
 require_relative 'entities/obstacle_object'
+require_relative 'ui/dialogue_controller'
 
 module ScenicRoute
   class Game < Gosu::Window
-    WIDTH = 1280
+    WIDTH = 1280  
     HEIGHT = 720
     FPS = 60
 
@@ -25,6 +26,8 @@ module ScenicRoute
 
     def initialize
       super WIDTH, HEIGHT
+
+      Gosu::enable_undocumented_retrofication
       
       UI::ControllerSupervisor.window = self
 
@@ -41,6 +44,7 @@ module ScenicRoute
       UI::BackgroundController.new(map)
       UI::HudController.new(map)
       UI::ParticleController.new
+      UI::DialogueController.new.dialogue_queue << "This is some text.\nIt could be pretty long. Woo!"
     end 
 
     def draw
