@@ -79,12 +79,19 @@ module ScenicRoute
 
       def self.load_map(filename, tile_set)
         contents = File.read(filename)
-        name, medal_thresholds_str, layout_str, objects_str = contents.split("\n---\n")
+        name, medal_thresholds_str, dialogue_str, layout_str, objects_str = contents.split("\n---\n")
+
+        p contents.split("\n---\n")
+
+        # Horrifying way to chunk a list which is probably illegal but ah well
+        dialogue_array = dialogue_str.split("\n")
+          .each_cons(2).with_index.select { |_, i| i.even? }
+          .map { |x, _| x.join("\n") }
 
         map = Entities::Map.new(convert_layout(layout_str), tile_set)
         map.tile_objects.append(*convert_objects(objects_str))
         map.metadata = MapMetadata.new(name,
-          medal_thresholds_str.split.map(&:to_i))
+          medal_thresholds_str.split.map(&:to_i), dialogue_array)
 
         map
       end
