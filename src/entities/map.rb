@@ -16,7 +16,7 @@ module ScenicRoute
 
       ##
       # @return [Array<Route>] An array of the routes on this track.
-      attr_reader :routes
+      attr_accessor :routes
 
       ##
       # @return [Tiles::TileSet] The tile set with which this map is drawn.
