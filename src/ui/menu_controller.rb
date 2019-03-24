@@ -2,6 +2,7 @@ require_relative 'controller'
 require_relative 'controller_supervisor'
 require_relative '../io/image_manager'
 require_relative '../io/level_manager'
+require_relative '../io/font_manager'
 require_relative 'map_controller'
 
 module ScenicRoute
@@ -28,7 +29,7 @@ module ScenicRoute
 
           @button_bounds[m] ||= [x, y, level_card.width, level_card.height]
 
-          Gosu::Font.new(ControllerSupervisor.window, 'res/font/Silkscreen.ttf', 30).draw_text(
+          IO::FontManager.font(30).draw_text(
             m.metadata.name, x + 15, y + 15, 50, 1, 1, 0xFF000000
           )
         end

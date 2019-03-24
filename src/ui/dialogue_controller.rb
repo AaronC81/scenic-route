@@ -1,5 +1,6 @@
 require_relative 'controller'
 require_relative '../io/image_manager'
+require_relative '../io/font_manager'
 
 module ScenicRoute
   module UI
@@ -42,7 +43,7 @@ module ScenicRoute
         background_image.draw(Game::WIDTH / 2 - 300, Game::HEIGHT - 180, 20)
 
         # Draw the text
-        Gosu::Font.new(ControllerSupervisor.window, 'res/font/Silkscreen.ttf', 30).draw_text(
+        IO::FontManager.font(30).draw_text(
           dialogue_queue.first[0..@current_index],
           Game::WIDTH / 2 - 280, Game::HEIGHT - 160, 20, 1, 1, 0xFF000000
         )

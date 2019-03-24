@@ -2,15 +2,13 @@ require 'gosu'
 require_relative 'controller'
 require_relative '../gameplay/scoring'
 require_relative '../io/image_manager'
+require_relative '../io/font_manager'
 
 module ScenicRoute
   module UI
     ##
     # Handles drawing a HUD on the screen.
     class HudController < Controller
-      LAPSUS_PRO = './res/font/LapsusPro-Bold.ttf'
-      SILKSCREEN = './res/font/Silkscreen.ttf'
-
       def initialize
         super
 
@@ -18,23 +16,16 @@ module ScenicRoute
         @previous_valid_scores = Hash.new(0)
       end
 
-      def init_fonts
-        # TODO: FontManager?
-        @score_font ||= Gosu::Font.new(ControllerSupervisor.window, SILKSCREEN, 70)
-        @heading_font ||= Gosu::Font.new(ControllerSupervisor.window, SILKSCREEN, 30)
-        @mini_font ||= Gosu::Font.new(ControllerSupervisor.window, SILKSCREEN, 25)
-      end
-
       def draw
-        init_fonts
         return if map.nil?
 
         # Draw overall score
         scores = Gameplay::Scoring.scores_for_map(map)
         @previous_valid_total_score = scores.values.min if scores.values.all?
 
-        @heading_font.draw_text('SCORE', 50, 18, 1, 1.0, 1.0, Gosu::Color::BLACK)
-        @score_font.draw_text(@previous_valid_total_score,
+        IO::FontManager.font(30).draw_text('SCORE', 50, 18, 1, 1.0, 1.0,
+          Gosu::Color::BLACK)
+        IO::FontManager.font(70).draw_text(@previous_valid_total_score,
           50, 50, 1, 1.0, 1.0,
           scores.values.all? ? Gosu::Color::BLACK : Gosu::Color::GRAY)
 
@@ -45,7 +36,7 @@ module ScenicRoute
 
           @previous_valid_scores[station] = score unless score.nil?
 
-          @mini_font.draw_text_rel(@previous_valid_scores[station],
+          IO::FontManager.font(25).draw_text_rel(@previous_valid_scores[station],
             i * 50 + 190, 90, 10, 0.5, 0.5,
             1, 1, !score.nil? \
               ? Entities::StationObject::TEXT_COLORS[station]
