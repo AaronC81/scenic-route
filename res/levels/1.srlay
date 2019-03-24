@@ -1,0 +1,41 @@
+Customer Needs
+---
+55726160-30bc-0137-f1ff-64006afdaf02
+---
+5 18 26
+---
+Good work on your very first
+track.
+There are plenty more to
+come!
+You may have noticed that
+each track is scored.
+Your score is shown in the
+top right of the screen.
+You get one point for each
+tile of track.
+This means you must make the
+longest track you can!
+After all, our passengers
+are here for the scenery.
+Now try making the longest
+route between these stations.
+Try "snaking" the track
+around the space you have.
+You'll receive a medal based
+on how well you've done.
+Your medal is shown to the
+right of your score.
+Go for the gold medal on
+this one!
+---
+.D^^^^^^^^A.
+.<########>.
+.<########>.
+.<########>.
+.<########>.
+.<########>.
+.C________B.
+---
+StationObject 2,3 :east 1
+StationObject 9,3 :west 1
