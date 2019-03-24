@@ -2,6 +2,7 @@ require_relative '../entities/map'
 require_relative '../entities/point'
 require_relative 'controller'
 require_relative 'dialogue_controller'
+require_relative '../io/save_manager'
 
 module ScenicRoute
   module UI
@@ -94,6 +95,9 @@ module ScenicRoute
 
         @drawing = false if id == Gosu::MsLeft
         @removing = false if id == Gosu::MsRight
+
+        IO::SaveManager.save_map_state(map) if id == Gosu::KB_S
+        IO::SaveManager.load_map_state(map) if id == Gosu::KB_L
       end
     end
   end
