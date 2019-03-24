@@ -1,6 +1,6 @@
 module ScenicRoute
   module IO
-    MapMetadata = Struct.new('MapMetadata', :name, :medal_thresholds, :dialogue) do
+    MapMetadata = Struct.new('MapMetadata', :name, :id, :medal_thresholds, :dialogue) do
       def bronze_threshold
         medal_thresholds[0]
       end
