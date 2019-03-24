@@ -27,6 +27,7 @@ module ScenicRoute
 
       def draw
         init_fonts
+        return if map.nil?
 
         # Draw overall score
         scores = Gameplay::Scoring.scores_for_map(map)

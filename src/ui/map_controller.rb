@@ -34,7 +34,7 @@ module ScenicRoute
 
       def load(map)
         @map = map
-        map.controller = self
+        map&.controller = self
         @drawing = false
         @removing = false
         @controls_enabled = true
@@ -51,6 +51,7 @@ module ScenicRoute
       # Draws the map to the screen, and also draw any new track to the screen.
       def draw
         super
+        return if map.nil?
 
         map.draw(origin.x, origin.y, 1)
 

@@ -9,6 +9,8 @@ module ScenicRoute
     # Handles drawing a background to the window.
     class BackgroundController < Controller
       def draw
+        return if map.nil?
+        
         # Calculate offset so that tiles align with map
         map_origin = ControllerSupervisor.controller(MapController).origin
 
