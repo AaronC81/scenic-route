@@ -15,6 +15,7 @@ require_relative 'ui/particle_controller'
 require_relative 'entities/particle'
 require_relative 'entities/obstacle_object'
 require_relative 'ui/dialogue_controller'
+require_relative 'ui/menu_controller'
 
 module ScenicRoute
   class Game < Gosu::Window
@@ -31,28 +32,16 @@ module ScenicRoute
       
       UI::ControllerSupervisor.window = self
 
-      @map = IO::MapLoader.load_map('res/layout/test.srlay', Tiles::TileManager.tile_set(:world))
+      @map = IO::MapLoader.load_map('res/levels/0.srlay', Tiles::TileManager.tile_set(:world))
 
-      UI::MapController.new(
-        map,
-        Entities::Point.new(
-          (WIDTH - map.pixel_width) / 2,
-          (HEIGHT - map.pixel_height) / 2
-        )
-      )
+      UI::MapController.new(nil)
 
-      UI::BackgroundController.new(map)
-      UI::HudController.new(map)
+      UI::DialogueController.new
+      UI::BackgroundController.new
+      UI::HudController.new
       UI::ParticleController.new
-      %{
-      UI::DialogueController.new.dialogue_queue = ["Welcome to Scenic Route!",
-        "You'll be started building\ntracks in no time.",
-        "In each level, you must build\nthe longest track you can.",
-        "Our passengers want to see\nall the island has to offer!",
-        "Use the left mouse button to\ndraw tracks.",
-        "The right mouse button erases\ntracks if you make a mistake.",
-        "Draw a track along the island\nto connect the stations."]}
-      UI::DialogueController.new.dialogue_queue = map.metadata.dialogue
+      
+      UI::MenuController.new
     end 
 
     def draw
