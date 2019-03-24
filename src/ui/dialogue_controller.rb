@@ -5,9 +5,6 @@ require_relative '../io/font_manager'
 module ScenicRoute
   module UI
     class DialogueController < Controller
-      # TODO: disable controls during dialogue using a boolean accessor in 
-      # MapController
-
       CHARACTER_TIME = 3
 
       attr_accessor :dialogue_queue
