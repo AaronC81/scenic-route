@@ -81,8 +81,6 @@ module ScenicRoute
         contents = File.read(filename)
         name, medal_thresholds_str, dialogue_str, layout_str, objects_str = contents.split("\n---\n")
 
-        p contents.split("\n---\n")
-
         # Horrifying way to chunk a list which is probably illegal but ah well
         dialogue_array = dialogue_str.split("\n")
           .each_cons(2).with_index.select { |_, i| i.even? }
