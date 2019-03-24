@@ -22,4 +22,4 @@ to connect the stations.
 .C________B.
 ---
 StationObject 2,1 :east 1
-StationObject 8,1 :west 1
+StationObject 9,1 :west 1
