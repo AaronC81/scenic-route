@@ -38,6 +38,9 @@ module ScenicRoute
         @drawing = false
         @removing = false
         @controls_enabled = true
+
+        ControllerSupervisor.controller(DialogueController).dialogue_queue = \
+          map.metadata.dialogue unless map.nil?
       end
 
       def origin
