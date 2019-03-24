@@ -48,6 +48,14 @@ module ScenicRoute
         medal_img = IO::ImageManager.image("medal_#{medal}".to_sym)
 
         medal_img.draw(170, 10, 10)
+
+        # Draw the next level button, if necessary
+        if medal != 'none'
+          next_level_img = IO::ImageManager.image(:button_next_level)
+          next_level_img.draw(Game::WIDTH - next_level_img.width - 20, 20, 10)
+          IO::FontManager.font(25).draw_text("Next\nLevel",
+            Game::WIDTH - next_level_img.width + 10, 25, 10, 1, 1, 0xFF000000)
+        end
       end
     end
   end
