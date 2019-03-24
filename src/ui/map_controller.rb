@@ -1,6 +1,7 @@
 require_relative '../entities/map'
 require_relative '../entities/point'
 require_relative 'controller'
+require_relative 'dialogue_controller'
 
 module ScenicRoute
   module UI
@@ -25,16 +26,25 @@ module ScenicRoute
       # Create a new map controller.
       # 
       # @param [Entities::Map] map
-      # @param [Entities::Point] origin
-      def initialize(map, origin)
+      def initialize(map)
         super()
 
+        load(map)
+      end
+
+      def load(map)
         @map = map
         map.controller = self
-        @origin = origin
         @drawing = false
         @removing = false
         @controls_enabled = true
+      end
+
+      def origin
+        Entities::Point.new(
+          (Game::WIDTH - map.pixel_width) / 2,
+          (Game::HEIGHT - map.pixel_height) / 2
+        )
       end
 
       ##
