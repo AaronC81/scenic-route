@@ -7,10 +7,14 @@ require_relative 'map_controller'
 module ScenicRoute
   module UI
     class MenuController < Controller
+      attr_accessor :on_menu
+      alias on_menu? on_menu
+
       def initialize
         super
 
         @button_bounds = {}
+        @on_menu = true
       end
 
       def draw
@@ -32,12 +36,13 @@ module ScenicRoute
 
       def button_down(id)
         super
-        return if id != Gosu::MS_LEFT
+        return if id != Gosu::MS_LEFT || !on_menu?
 
         @button_bounds.each do |map, bound|
           x, y, width, height = bound
           if mouse_point.x >= x && mouse_point.y >= y \
             && mouse_point.x <= x + width && mouse_point.y <= y + height
+            self.on_menu = false
             ControllerSupervisor.controller(MapController).load(map)
           end
         end
