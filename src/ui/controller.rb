@@ -21,6 +21,10 @@ module ScenicRoute
         )
       end
 
+      def map
+        ControllerSupervisor.controller(MapController).map
+      end
+
       ##
       # An event handler called when {Gosu::Window#draw} is called.
       def draw

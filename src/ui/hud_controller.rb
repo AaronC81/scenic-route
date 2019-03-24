@@ -11,12 +11,9 @@ module ScenicRoute
       LAPSUS_PRO = './res/font/LapsusPro-Bold.ttf'
       SILKSCREEN = './res/font/Silkscreen.ttf'
 
-      attr_reader :map
+      def initialize
+        super
 
-      def initialize(map)
-        super()
-
-        @map = map
         @previous_valid_total_score = 0
         @previous_valid_scores = Hash.new(0)
       end
