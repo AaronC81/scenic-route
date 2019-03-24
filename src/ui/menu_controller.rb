@@ -4,6 +4,7 @@ require_relative '../io/image_manager'
 require_relative '../io/level_manager'
 require_relative '../io/font_manager'
 require_relative 'map_controller'
+require_relative '../io/save_manager'
 
 module ScenicRoute
   module UI
@@ -45,6 +46,7 @@ module ScenicRoute
             && mouse_point.x <= x + width && mouse_point.y <= y + height
             self.on_menu = false
             ControllerSupervisor.controller(MapController).load(map)
+            IO::SaveManager.load_map_state(map)
           end
         end
       end
