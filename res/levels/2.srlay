@@ -28,3 +28,4 @@ harder than this...
 StationObject 2,5 :east 1
 StationObject 9,3 :west 1
 ObstacleObject 3,4 :tree
+ObstacleObject 2,1 :tree
