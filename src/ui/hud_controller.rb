@@ -3,6 +3,8 @@ require_relative 'controller'
 require_relative '../gameplay/scoring'
 require_relative '../io/image_manager'
 require_relative '../io/font_manager'
+require_relative 'transition_controller'
+require_relative '../io/level_manager'
 
 module ScenicRoute
   module UI
@@ -14,6 +16,7 @@ module ScenicRoute
 
         @previous_valid_total_score = 0
         @previous_valid_scores = Hash.new(0)
+        @next_level_button_showing = false
       end
 
       def draw
@@ -51,11 +54,36 @@ module ScenicRoute
 
         # Draw the next level button, if necessary
         if medal != 'none'
+          @next_level_button_showing = true
           next_level_img = IO::ImageManager.image(:button_next_level)
           next_level_img.draw(Game::WIDTH - next_level_img.width - 20, 20, 10)
           IO::FontManager.font(25).draw_text("Next\nLevel",
             Game::WIDTH - next_level_img.width + 10, 25, 10, 1, 1, 0xFF000000)
+        else
+          @next_level_button_showing = false
         end
+      end
+
+      def button_down(id)
+        # TODO: not actually right coords but OK
+        return unless id == Gosu::MS_LEFT && @next_level_button_showing &&
+          mouse_point.x > 668 && mouse_point.y < 60 
+
+        # TODO: make this reusable, as its copy-pasted from MenuCtrlr
+        trans = ControllerSupervisor.controller(TransitionController)
+        trans.cover
+        trans.covered_callback = ->{
+          Thread.new do
+            sleep 1
+            
+            # TODO: this is a very fragile way of getting the next level
+            new_map_idx = IO::LevelManager.maps.map { |m| m.metadata.id}.index(map.metadata.id) + 1
+            new_map = IO::LevelManager.maps[new_map_idx]
+            ControllerSupervisor.controller(MapController).load(new_map)
+            IO::SaveManager.load_map_state(new_map)
+            trans.uncover
+          end
+        }
       end
     end
   end

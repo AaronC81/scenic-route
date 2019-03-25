@@ -46,6 +46,8 @@ module ScenicRoute
           if mouse_point.x >= x && mouse_point.y >= y \
             && mouse_point.x <= x + width && mouse_point.y <= y + height
             self.on_menu = false
+
+            # TODO: make this reusable, as its copy-pasted into HUD's next level
             trans = ControllerSupervisor.controller(TransitionController)
             trans.cover
             trans.covered_callback = ->{
