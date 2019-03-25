@@ -78,7 +78,7 @@ module ScenicRoute
       end
 
       def self.load_map(filename, tile_set)
-        contents = File.read(filename)
+        contents = File.read(filename).gsub(?\r, '')
         name, id, medal_thresholds_str, dialogue_str, layout_str, objects_str = contents.split("\n---\n")
 
         # Horrifying way to chunk a list which is probably illegal but ah well
