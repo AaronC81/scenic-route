@@ -1,0 +1,27 @@
+Marking the Land
+---
+ea9d98f0-30c2-0137-f202-64006afdaf02
+---
+10 20 26
+---
+Hey!
+That's a landmark!
+Our passengers love seeing
+landmarks.
+So much so, you get double
+points for tracks near them!
+Tracks next to them will add
+2 to your score.
+You should always try to
+build next to landmarks!
+---
+.D^A..D^^^A.
+.<#a^^d###>.
+.<########>.
+.Hiiiih###>.
+.<########>.
+.C________B.
+---
+StationObject 2,1 :south 1
+StationObject 2,4 :east 1
+LandmarkObject 8,2 :statue
