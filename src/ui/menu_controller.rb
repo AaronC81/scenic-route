@@ -5,6 +5,7 @@ require_relative '../io/level_manager'
 require_relative '../io/font_manager'
 require_relative 'map_controller'
 require_relative '../io/save_manager'
+require_relative 'transition_controller'
 
 module ScenicRoute
   module UI
@@ -45,8 +46,16 @@ module ScenicRoute
           if mouse_point.x >= x && mouse_point.y >= y \
             && mouse_point.x <= x + width && mouse_point.y <= y + height
             self.on_menu = false
-            ControllerSupervisor.controller(MapController).load(map)
-            IO::SaveManager.load_map_state(map)
+            trans = ControllerSupervisor.controller(TransitionController)
+            trans.cover
+            trans.covered_callback = ->{
+              Thread.new do
+                sleep 1
+                ControllerSupervisor.controller(MapController).load(map)
+                IO::SaveManager.load_map_state(map)
+                trans.uncover
+              end
+            }
           end
         end
       end
