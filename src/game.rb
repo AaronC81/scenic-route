@@ -16,6 +16,7 @@ require_relative 'entities/particle'
 require_relative 'entities/obstacle_object'
 require_relative 'ui/dialogue_controller'
 require_relative 'ui/menu_controller'
+require_relative 'ui/transition_controller'
 
 module ScenicRoute
   class Game < Gosu::Window
@@ -42,6 +43,7 @@ module ScenicRoute
       UI::ParticleController.new
       
       UI::MenuController.new
+      UI::TransitionController.new
     end 
 
     def draw
