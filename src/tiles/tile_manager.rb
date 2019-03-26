@@ -91,7 +91,7 @@ module ScenicRoute
         end
         
         raise ArgumentError, 'no dimensions given' if width.nil? || height.nil?
-        result = Gosu::Image.load_tiles(filename, width, height)
+        result = Gosu::Image.load_tiles(filename, width, height, tileable: true)
           
         # Use supplied tile defs for this tileset, or look at the ones we know
         defs = tile_definitions || TILE_SET_DEFINITIONS[name]
