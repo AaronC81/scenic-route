@@ -16,11 +16,12 @@ module ScenicRoute
 
       ##
       # @return [Entities::Point] The current mouse position, relative to the 
-      #   window's top-left corner.
+      #   window's top-left corner. Unlike Gosu's provided +mouse_x+ and
+      #   +mouse_y+ methods, this is scaled based on resolution scaling.
       def mouse_point
         Entities::Point.new(
-          ControllerSupervisor.window.mouse_x,
-          ControllerSupervisor.window.mouse_y
+          ControllerSupervisor.window.mouse_x / (Game::ACTUAL_WIDTH.to_f / Game::WIDTH),
+          ControllerSupervisor.window.mouse_y / (Game::ACTUAL_HEIGHT.to_f / Game::HEIGHT)
         )
       end
 
