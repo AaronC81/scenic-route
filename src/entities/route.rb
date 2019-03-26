@@ -179,6 +179,8 @@ module ScenicRoute
         false
       end
 
+      ##
+      # Emits sparkle particles randomly from each tile along this route.
       def sparkle
         img = IO::ImageManager.image(:particle_sparkle)
 
