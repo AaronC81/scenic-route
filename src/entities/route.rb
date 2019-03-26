@@ -70,7 +70,6 @@ module ScenicRoute
         return {} if points.length == 0
         return {points.first => :track_intersection} if points.length == 1
 
-        # TODO: special cases, less than 3 points?
         result = {
           points.first => [:west, :east].include?(points.first.heading_to(points[1])) \
             ? :track_horizontal_straight_on_ground
@@ -120,8 +119,7 @@ module ScenicRoute
       #
       # @return [Route] The joined route.
       def join(other)
-        # TODO: length edge cases
-        # TODO: check same map
+        raise 'cannot join routes from different maps' if map != other.map
 
         if points.first.adjacent_to?(other.points.first)
           combined = other.points.reverse + points
