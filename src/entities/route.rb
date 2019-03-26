@@ -36,7 +36,7 @@ module ScenicRoute
       # @param [Symbol] in_heading The direction onto the tile.
       # @param [Symbol] out_heading The direction off of the tile.
       #
-      # @return [Symbol] The tile name, which may be passed to {TileSet#tile}.
+      # @return [Symbol] The tile name, which may be passed to {Tiles::TileSet#tile}.
       #
       # @raise [ArgumentError] If there is no tile to represent the given
       #   movement.

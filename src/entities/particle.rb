@@ -20,20 +20,20 @@ module ScenicRoute
       ##
       # Creates a new particle.
       # With the exception of origin and image, all parameters may either be
-      # {Numeric} or {Range}. If they are {Numeric}, they are left intact; if
-      # they are {Range}, a random value is chosen for them using {rand}.
+      # +Numeric+ or +Range+. If they are +Numeric+, they are left intact; if
+      # they are +Range+, a random value is chosen for them using +rand+.
       # Note that this random value is chosen in the constructor, not every
       # tick.
       # @param [Point] origin
-      # @param [Image] image
+      # @param [Gosu::Image] image
       def initialize(origin, image, speed_x, speed_y, rotation, 
         angular_velocity, lifetime, opacity)
         @image = image
         @point = origin
 
         ##
-        # Given a {Range}, returns a value from it. Otherwise, returns the
-        # input {Numeric}.
+        # Given a +Range+, returns a value from it. Otherwise, returns the
+        # input +Numeric+.
         # @param [Range, Numeric] x
         # @return [Float]
         def evaluate_param(x); (x.is_a?(Range) ? rand(x) : x).to_f; end

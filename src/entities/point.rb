@@ -8,7 +8,7 @@ module ScenicRoute
       #
       # @param [Point] other The other point.
       # @param [Boolean] require_adjacent If true, nil will be returned unless
-      #   {other} is directly adjacent to this point.
+      #   +other+ is directly adjacent to this point.
       # 
       # @return [Symbol?] The compass heading from this point to another, either
       #   :north, :south, :east, or :west. If it is not directly along one of
