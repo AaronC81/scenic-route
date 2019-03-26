@@ -14,7 +14,8 @@ module ScenicRoute
         mouse: 'res/img/mouse.png',
         dialogue_background: 'res/img/dialogue_background.png',
         level_card: 'res/img/level_card.png',
-        button_next_level: 'res/img/button_next_level.png'
+        button_next_level: 'res/img/button_next_level.png',
+        logo: 'res/img/logo.png'
       }
 
       def self.image(name)
