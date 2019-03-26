@@ -72,12 +72,9 @@ module ScenicRoute
               && mouse_point.x <= x + width && mouse_point.y <= y + height
               self.on_menu = false
 
-              # TODO: make this reusable, as its copy-pasted into HUD's next level
               ControllerSupervisor.controller(TransitionController).cover_during do
                 sleep 1
-                ControllerSupervisor.controller(MapController).load(map)
-                IO::SaveManager.load_map_state(map)
-                ControllerSupervisor.controller(HudController).reset
+                ControllerSupervisor.load_map(map)
               end
             end
           end

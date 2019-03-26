@@ -1,4 +1,5 @@
 require 'set'
+require_relative '../io/save_manager'
 
 module ScenicRoute
   module UI
@@ -36,6 +37,12 @@ module ScenicRoute
         matching = @@controllers.select { |x| x.is_a?(type) }
         raise 'not one controller of this type' if matching.length != 1
         matching.first
+      end
+
+      def self.load_map(map)
+        ControllerSupervisor.controller(MapController).load(map)
+        IO::SaveManager.load_map_state(map)
+        ControllerSupervisor.controller(HudController).reset
       end
     end
   end
