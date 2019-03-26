@@ -93,5 +93,3 @@ module ScenicRoute
     end
   end
 end
-
-ScenicRoute::Game.new.show
