@@ -72,28 +72,18 @@ module ScenicRoute
               self.on_menu = false
 
               # TODO: make this reusable, as its copy-pasted into HUD's next level
-              trans = ControllerSupervisor.controller(TransitionController)
-              trans.cover
-              trans.covered_callback = ->{
-                Thread.new do
-                  sleep 1
-                  ControllerSupervisor.controller(MapController).load(map)
-                  IO::SaveManager.load_map_state(map)
-                  trans.uncover
-                end
-              }
+              ControllerSupervisor.controller(TransitionController).cover_during do
+                sleep 1
+                ControllerSupervisor.controller(MapController).load(map)
+                IO::SaveManager.load_map_state(map)
+              end
             end
           end
         when :title
-          trans = ControllerSupervisor.controller(TransitionController)
-          trans.cover
-          trans.covered_callback = ->{
-            Thread.new do
-              sleep 1
-              self.current_page = :level_select
-              trans.uncover
-            end
-          }
+          ControllerSupervisor.controller(TransitionController).cover_during do
+            sleep 1
+            self.current_page = :level_select
+          end
         end
       end
     end

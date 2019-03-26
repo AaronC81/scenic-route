@@ -23,6 +23,11 @@ module ScenicRoute
         @uncovering = true
       end
 
+      def cover_during(&block)
+        cover
+        self.covered_callback = ->{ Thread.new { block.(); uncover } }
+      end
+
       def draw
         must_call_covered_callback = false
         if @covering && @opacity < 1

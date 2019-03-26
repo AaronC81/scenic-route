@@ -70,20 +70,15 @@ module ScenicRoute
           mouse_point.x > 668 && mouse_point.y < 60 
 
         # TODO: make this reusable, as its copy-pasted from MenuCtrlr
-        trans = ControllerSupervisor.controller(TransitionController)
-        trans.cover
-        trans.covered_callback = ->{
-          Thread.new do
-            sleep 1
-            
-            # TODO: this is a very fragile way of getting the next level
-            new_map_idx = IO::LevelManager.maps.map { |m| m.metadata.id}.index(map.metadata.id) + 1
-            new_map = IO::LevelManager.maps[new_map_idx]
-            ControllerSupervisor.controller(MapController).load(new_map)
-            IO::SaveManager.load_map_state(new_map)
-            trans.uncover
-          end
-        }
+        ControllerSupervisor.controller(TransitionController).cover_during do
+          sleep 1
+          
+          # TODO: this is a very fragile way of getting the next level
+          new_map_idx = IO::LevelManager.maps.map { |m| m.metadata.id}.index(map.metadata.id) + 1
+          new_map = IO::LevelManager.maps[new_map_idx]
+          ControllerSupervisor.controller(MapController).load(new_map)
+          IO::SaveManager.load_map_state(new_map)
+        end
       end
     end
   end
