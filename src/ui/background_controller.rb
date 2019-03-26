@@ -8,6 +8,9 @@ module ScenicRoute
     ##
     # Handles drawing a background to the window.
     class BackgroundController < Controller
+      ##
+      # Draws the background of the map to the window. Does nothing if there
+      # is no current map.
       def draw
         return if map.nil?
         

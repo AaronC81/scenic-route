@@ -33,6 +33,12 @@ module ScenicRoute
         load(map)
       end
 
+      ##
+      # Partially resets this map controller, overwriting the current map and 
+      # assigning its controller to this. Controls are re-enabled and the
+      # {DialogueController} is populated with dialogue from the map's metadata.
+      #
+      # @param [Entities::Map] map
       def load(map)
         @map = map
         map&.controller = self
@@ -44,6 +50,8 @@ module ScenicRoute
           map.metadata.dialogue unless map.nil?
       end
 
+      ##
+      # The top-left corner of the map to be drawn.
       def origin
         Entities::Point.new(
           (Game::WIDTH - map.pixel_width) / 2,
@@ -81,6 +89,8 @@ module ScenicRoute
         end
       end
 
+      ##
+      # Handles the beginning of draw or remove track events.
       def button_down(id)
         super
         return unless controls_enabled?
@@ -89,6 +99,8 @@ module ScenicRoute
         @removing = true if id == Gosu::MsRight
       end
 
+      ##
+      # Handles the end of draw or remove track events.
       def button_up(id)
         super
         return unless controls_enabled?

@@ -14,6 +14,9 @@ module ScenicRoute
         ControllerSupervisor.register(self)
       end
 
+      ##
+      # @return [Entities::Point] The current mouse position, relative to the 
+      #   window's top-left corner.
       def mouse_point
         Entities::Point.new(
           ControllerSupervisor.window.mouse_x,
@@ -21,29 +24,29 @@ module ScenicRoute
         )
       end
 
+      ##
+      # @return [Entities::Map] The currently loaded map.
       def map
         ControllerSupervisor.controller(MapController).map
       end
 
       ##
-      # An event handler called when {Gosu::Window#draw} is called.
+      # An event handler called when the Gosu window calls +#draw+.
       def draw
       end
 
       ##
-      # An event handler called when {Gosu::Window#update} is called.
+      # An event handler called when the Gosu window calls +#update+.
       def update
       end
 
       ##
-      # An event handler called when {Gosu::Window#button_down} is called, and
-      # is not a mouse event.
+      # An event handler called when the Gosu window calls +#button_down+.
       def button_down(id)
       end
 
       ##
-      # An event handler called when {Gosu::Window#button_up} is called, and
-      # is not a mouse event.
+      # An event handler called when the Gosu window calls +#button_up+.
       def button_up(id)
       end
     end

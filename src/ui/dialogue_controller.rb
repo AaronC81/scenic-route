@@ -5,13 +5,26 @@ require_relative 'animation_controller'
 
 module ScenicRoute
   module UI
+    ##
+    # Draws dialogue for the currently loaded map.
     class DialogueController < Controller
+      ##
+      # The ticks between each character being printed during ongoing dialogue.
+      # Some other factors, such as The Conductor's bobbing, are relative to
+      # this.
       CHARACTER_TIME = 3
 
+      ##
+      # @return [Array<String>] The queue of messages waiting to be printed.
       attr_accessor :dialogue_queue
 
+      ##
+      # @return [Integer] The character in the current dialogue message which
+      #   has been reached by the printing animation so far.
       attr_accessor :current_index
 
+      ##
+      # Creates a new dialogue controller.
       def initialize
         super
         @dialogue_queue = []
@@ -28,6 +41,9 @@ module ScenicRoute
         )
       end
 
+      ##
+      # Draws dialogue, The Conductor, and anything else required to the screen,
+      # if dialogue is ongoing. Also disables map controls.
       def draw
         return if dialogue_queue.empty?
 
@@ -57,6 +73,8 @@ module ScenicRoute
         end
       end
 
+      ##
+      # Updates animation counters if dialogue is ongoing.
       def update
         return if dialogue_queue.empty?
         
@@ -73,6 +91,9 @@ module ScenicRoute
         end
       end
 
+      ##
+      # Moves onto the next dialogue message and resets any animation counters.
+      # If the last message was just advanced from, re-enables map controls.
       def advance
         @dialogue_queue.shift
         @current_index = 0
@@ -84,10 +105,15 @@ module ScenicRoute
           if @dialogue_queue.empty?
       end
 
+      ##
+      # @return [Boolean] True if the current dialogue message has been fully
+      #   printed.
       def current_done?
         @current_index == dialogue_queue.first.length - 1
       end
 
+      ##
+      # Moves onto the next dialogue message when the mouse is clicked.
       def button_down(id)
         return if dialogue_queue.empty? || id != Gosu::MS_LEFT
 

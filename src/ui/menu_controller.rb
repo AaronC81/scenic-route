@@ -10,12 +10,24 @@ require_relative 'hud_controller'
 
 module ScenicRoute
   module UI
+    ##
+    # Handles drawing the menu; that is, everything displayed when the map is
+    # not being shown.
     class MenuController < Controller
+      # TODO: this class is really messy
+      
+      ##
+      # @return [Boolean] Whether the menu is currently being displayed.
       attr_accessor :on_menu
       alias on_menu? on_menu
 
+      ##
+      # @return [Symbol] The current page of the menu. Either :title or
+      #   :level_select.
       attr_accessor :current_page
 
+      ##
+      # Creates a new menu controller.
       def initialize
         super
 
@@ -31,6 +43,8 @@ module ScenicRoute
         )
       end
 
+      ##
+      # Draws the menu to the screen, if the map is not being shown.
       def draw
         return unless map.nil?
 
@@ -38,6 +52,7 @@ module ScenicRoute
         when :level_select
           level_card = IO::ImageManager.image(:level_card)
 
+          # Draw each level card, with two maps to a row
           IO::LevelManager.maps.each.with_index do |m, i|
             x = i.even? ? 100 : Game::WIDTH - level_card.width - 100
             y = (i / 2.to_i) * 100 + 150
@@ -60,6 +75,8 @@ module ScenicRoute
         end
       end
 
+      ##
+      # Handles menu button clicks.
       def button_down(id)
         super
         return if id != Gosu::MS_LEFT || !on_menu?

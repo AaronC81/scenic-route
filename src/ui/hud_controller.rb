@@ -9,8 +9,11 @@ require_relative '../io/level_manager'
 module ScenicRoute
   module UI
     ##
-    # Handles drawing a HUD on the screen.
+    # Handles drawing a HUD on the screen. This includes the overall score,
+    # station scorecards, medal, and next level button.
     class HudController < Controller
+      ##
+      # Creates a new HUD controller.
       def initialize
         super
 
@@ -19,12 +22,16 @@ module ScenicRoute
         @next_level_button_showing = false
       end
 
+      ##
+      # Resets the previous valid values and next level button state.
       def reset
         @previous_valid_total_score = 0
         @previous_valid_scores = Hash.new(0)
         @next_level_button_showing = false
       end
 
+      ##
+      # Draws the HUD to the screen.
       def draw
         return if map.nil?
 
@@ -70,6 +77,8 @@ module ScenicRoute
         end
       end
 
+      ##
+      # Handles clicks on the next level button.
       def button_down(id)
         # TODO: not actually right coords but OK
         return unless id == Gosu::MS_LEFT && @next_level_button_showing &&

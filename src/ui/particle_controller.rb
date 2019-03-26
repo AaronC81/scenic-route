@@ -2,19 +2,30 @@ require_relative 'controller'
 
 module ScenicRoute
   module UI
+    ##
+    # Handles drawing {Entities::Particle} instances to the screen.
     class ParticleController < Controller
+      ##
+      # @return [Array<Entities::Particle>] The particles currently being drawn.
       attr_reader :particles
 
+      ##
+      # Creates a new particle controller.
       def initialize
-        super()
+        super
 
         @particles = []
       end
 
+      ##
+      # Spawns a new particle, adding it to this controller.
       def spawn(particle)
         particles << particle
       end
 
+      ##
+      # Draws each particle known to this controller and ticks its attributes.
+      # If a particle dies, it is removed from {particles}. 
       def draw
         super
 
