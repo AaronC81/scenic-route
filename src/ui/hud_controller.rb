@@ -19,6 +19,12 @@ module ScenicRoute
         @next_level_button_showing = false
       end
 
+      def reset
+        @previous_valid_total_score = 0
+        @previous_valid_scores = Hash.new(0)
+        @next_level_button_showing = false
+      end
+
       def draw
         return if map.nil?
 
@@ -78,6 +84,7 @@ module ScenicRoute
           new_map = IO::LevelManager.maps[new_map_idx]
           ControllerSupervisor.controller(MapController).load(new_map)
           IO::SaveManager.load_map_state(new_map)
+          reset
         end
       end
     end

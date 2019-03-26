@@ -6,6 +6,7 @@ require_relative '../io/font_manager'
 require_relative 'map_controller'
 require_relative '../io/save_manager'
 require_relative 'transition_controller'
+require_relative 'hud_controller'
 
 module ScenicRoute
   module UI
@@ -76,6 +77,7 @@ module ScenicRoute
                 sleep 1
                 ControllerSupervisor.controller(MapController).load(map)
                 IO::SaveManager.load_map_state(map)
+                ControllerSupervisor.controller(HudController).reset
               end
             end
           end
