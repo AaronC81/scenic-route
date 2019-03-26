@@ -2,7 +2,11 @@ require 'gosu'
 
 module ScenicRoute
   module IO
+    ##
+    # Handles loading images from files through symbolic image names.
     class ImageManager
+      ##
+      # A map of image symbols to their filepaths.
       IMAGE_PATHS = {
         particle_sparkle: 'res/img/particles/sparkle.png',
         medal_gold: 'res/img/medals/gold.png',
@@ -18,6 +22,12 @@ module ScenicRoute
         logo: 'res/img/logo.png'
       }
 
+      ##
+      # Loads an image from a file given its symbolic name, which must be a key
+      # in {IMAGE_PATHS}.
+      #
+      # @param [Symbol] name
+      # @return [Gosu::Image]
       def self.image(name)
         image_path = IMAGE_PATHS[name]
         raise 'no such image' if image_path.nil?

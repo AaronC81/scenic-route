@@ -4,7 +4,7 @@ require_relative 'map_metadata'
 module ScenicRoute
   module IO
     ##
-    # Creates {Map} instances from sclay files.
+    # Creates {Entities::Map} instances from sclay files.
     class MapLoader
       ##
       # The characters found in a layout file, mapped to the tile symbols they
@@ -46,10 +46,10 @@ module ScenicRoute
 
       ##
       # Converts a string to a layout.
+      # The string must be a 2D 'grid' of characters from {CHAR_LOOKUP}.
       #
       # @param [String] string
-      #
-      # @return [Array<Array<Symbol>>] The layout.
+      # @return [Array<Array<Symbol>>]
       def self.convert_layout(string)
         string.split(?\n).map do |line|
           line.chars.map do |char|
@@ -60,6 +60,15 @@ module ScenicRoute
         end
       end
 
+      ##
+      # Converts a string into a list of objects.
+      # The string must have one object on each line, in the format
+      # +type param1 param2 param3 ...+
+      # Each param may be a +Float+, a {Entities::Point} (denoted by two 
+      # integers separated by a comma), or a +Symbol+.
+      #
+      # @param [String] string
+      # @return [Array<Entities::TileObject>]
       def self.convert_objects(string)
         string.split(?\n).map do |line|
           object_name, *parameters = line.split
@@ -77,6 +86,20 @@ module ScenicRoute
         end
       end
 
+      ##
+      # Given a filepath to a map file, loads the map file into a
+      # {Entities::Map} instance.
+      # The current map format features the following, all separated by a line
+      # of three dashes:
+      #   - map name
+      #   - map UID
+      #   - medal threshold scores (bronze, silver, gold) with spaces between
+      #   - the lines of dialogue spoken by The Conductor before the level
+      #   - the objects on the map
+      #
+      # @param [String] filename
+      # @param [Tiles::TileSet] tile_set
+      # @return [Entities::Map]
       def self.load_map(filename, tile_set)
         contents = File.read(filename).gsub(?\r, '')
         name, id, medal_thresholds_str, dialogue_str, layout_str, objects_str = contents.split("\n---\n")
