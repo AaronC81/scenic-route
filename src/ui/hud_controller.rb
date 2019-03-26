@@ -75,7 +75,6 @@ module ScenicRoute
         return unless id == Gosu::MS_LEFT && @next_level_button_showing &&
           mouse_point.x > 668 && mouse_point.y < 60 
 
-        # TODO: make this reusable, as its copy-pasted from MenuCtrlr
         ControllerSupervisor.controller(TransitionController).cover_during do
           sleep 1
           
