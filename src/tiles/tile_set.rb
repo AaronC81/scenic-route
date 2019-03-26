@@ -50,6 +50,8 @@ module ScenicRoute
         images[tile_definitions[name]]
       end
 
+      ##
+      # Describes this tile set in a string.
       def inspect
         "#<TileSet: #{images.length} images, #{tile_definitions&.length} defs>"
       end
