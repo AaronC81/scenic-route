@@ -5,7 +5,8 @@ require_relative '../entities/route'
 module ScenicRoute
   module Gameplay
     ##
-    # Contains methods allowing scores to be calculated for {Map} instances.
+    # Contains methods allowing scores to be calculated for {Entities::Map}
+    # instances.
     class Scoring 
       ##
       # Calculates an overall score for a map.

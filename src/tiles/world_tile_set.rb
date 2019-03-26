@@ -63,8 +63,8 @@ module ScenicRoute
       end
 
       ##
-      # Ensures that all tiles which a {Map} would expect of tile set are
-      # present.
+      # Ensures that all tiles which a {Entities::Map} would expect of tile set 
+      # are present.
       #
       # @return [Boolean] True if the tile definitions are valid, false
       #    otherwise.
