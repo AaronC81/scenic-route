@@ -23,12 +23,26 @@ module ScenicRoute
   # The main game.
   class Game < Gosu::Window
     ##
-    # The width of the game window.
+    # The virtual width of the game window. This is not necessarily the same
+    # as the current resolution width.
     WIDTH = 1280  
 
     ##
-    # The height of the game window.
+    # The virtual height of the game window. This is not necessarily the same
+    # as the current resolution height.
     HEIGHT = 720
+
+    ##
+    # The resolution width of the window.
+    ACTUAL_WIDTH = 1920
+
+    ##
+    # The resolution height of the window.
+    ACTUAL_HEIGHT = 1080
+
+    ##
+    # Whether to make the window fullscreen.
+    FULLSCREEN = true
 
     ##
     # The frames-per-second at which the game should run.
@@ -37,7 +51,7 @@ module ScenicRoute
     ##
     # Create a new game window and show it.
     def initialize
-      super WIDTH, HEIGHT
+      super ACTUAL_WIDTH, ACTUAL_HEIGHT, fullscreen: FULLSCREEN
 
       Gosu::enable_undocumented_retrofication
       
@@ -61,7 +75,9 @@ module ScenicRoute
     # may not be if slowdown occurs. Dispatches the :draw event to all
     # controllers.
     def draw
-      UI::ControllerSupervisor.dispatch(:draw)
+      scale(ACTUAL_WIDTH.to_f / WIDTH, ACTUAL_HEIGHT.to_f / HEIGHT, 0, 0) do
+        UI::ControllerSupervisor.dispatch(:draw)
+      end
     end
 
     ##
