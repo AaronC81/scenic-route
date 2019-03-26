@@ -20,8 +20,8 @@ module ScenicRoute
       #   +mouse_y+ methods, this is scaled based on resolution scaling.
       def mouse_point
         Entities::Point.new(
-          ControllerSupervisor.window.mouse_x / (Game::ACTUAL_WIDTH.to_f / Game::WIDTH),
-          ControllerSupervisor.window.mouse_y / (Game::ACTUAL_HEIGHT.to_f / Game::HEIGHT)
+          ControllerSupervisor.window.mouse_x / ControllerSupervisor.window.width_scaling,
+          ControllerSupervisor.window.mouse_y / ControllerSupervisor.window.height_scaling
         )
       end
 

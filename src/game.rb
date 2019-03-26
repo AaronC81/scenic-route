@@ -71,11 +71,23 @@ module ScenicRoute
     end 
 
     ##
+    # @return [Numeric] The drawing scale factor for width.
+    def width_scaling
+      ACTUAL_WIDTH.to_f / WIDTH
+    end
+
+    ##
+    # @return [Numeric] The drawing scale factor for height.
+    def height_scaling
+      ACTUAL_HEIGHT.to_f / HEIGHT
+    end
+
+    ##
     # Invoked by Gosu each frame, which is usually {FPS} times per second but
     # may not be if slowdown occurs. Dispatches the :draw event to all
     # controllers.
     def draw
-      scale(ACTUAL_WIDTH.to_f / WIDTH, ACTUAL_HEIGHT.to_f / HEIGHT, 0, 0) do
+      scale(width_scaling, height_scaling, 0, 0) do
         UI::ControllerSupervisor.dispatch(:draw)
       end
     end
