@@ -93,6 +93,7 @@ module ScenicRoute
       # of three dashes:
       #   - map name
       #   - map UID
+      #   - map sorting key
       #   - medal threshold scores (bronze, silver, gold) with spaces between
       #   - the lines of dialogue spoken by The Conductor before the level
       #   - the objects on the map
