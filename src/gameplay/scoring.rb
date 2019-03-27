@@ -30,6 +30,15 @@ module ScenicRoute
         end.to_h
       end
 
+      ##
+      # Calculates a single overall score for a map.
+      #
+      # @param [Entities::Map] map
+      # @return [Integer]
+      def self.overall_score_for_map(map)
+        scores_for_map(map).values.min
+      end
+
       ## 
       # Calculates a score for a single route. It is the caller's responsibility
       # to ensure that the route is complete.
