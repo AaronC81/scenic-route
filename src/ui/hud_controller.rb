@@ -87,8 +87,7 @@ module ScenicRoute
         ControllerSupervisor.controller(TransitionController).cover_during do
           sleep 1
           
-          # TODO: this is a very fragile way of getting the next level
-          new_map_idx = IO::LevelManager.maps.map { |m| m.metadata.id}.index(map.metadata.id) + 1
+          new_map_idx = IO::LevelManager.maps.map { |m| m.metadata.id }.index(map.metadata.id) + 1
           new_map = IO::LevelManager.maps[new_map_idx]
           ControllerSupervisor.load_map(new_map)
         end
