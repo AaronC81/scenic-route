@@ -10,7 +10,9 @@ module ScenicRoute
       # @return [Array<Map>] An array of each map from {level_paths} loaded
       #   with the world tile set.
       def self.maps
-        level_paths.map { |x| MapLoader.load_map(x, Tiles::TileManager.tile_set(:world)) }
+        level_paths.map do |path|
+          MapLoader.load_map(path, Tiles::TileManager.tile_set(:world))
+        end.sort_by { |m| m.metadata.sort_key }
       end
 
       ##
