@@ -2,12 +2,16 @@ module ScenicRoute
   module IO
     ##
     # The metadata associated with a {Entities::Map}.
-    MapMetadata = Struct.new('MapMetadata', :name, :id, :medal_thresholds, :dialogue) do
+    MapMetadata = Struct.new('MapMetadata', :name, :id, :sort_key, :medal_thresholds, :dialogue) do
       # @!attribute name
       #   @return [String] The user-facing name of this map.
 
       # @!attribute id
       #   @return [String] The unique ID for this map.
+
+      # @!attribute sort_key
+      #   @return [Integer] An integer by which this map is sorted in the level
+      #     selector.
 
       # @!attribute medal_thresholds
       #   @return [Array<Integer>] An array of medal thresholds in the order
