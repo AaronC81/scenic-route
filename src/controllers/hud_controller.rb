@@ -24,7 +24,8 @@ module ScenicRoute
         next_level_img = IO::ImageManager.image(:button_next_level)
         @next_level_button = UI::MouseElement.new(
           Entities::Point.new(Game::WIDTH - next_level_img.width - 20, 20),
-          next_level_img
+          next_level_img,
+          IO::ImageManager.image(:button_next_level_hover)
         ).on_click do
           ControllerSupervisor.controller(TransitionController).cover_during do
             sleep 1
