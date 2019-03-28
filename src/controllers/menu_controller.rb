@@ -7,6 +7,7 @@ require_relative 'map_controller'
 require_relative '../io/save_manager'
 require_relative 'transition_controller'
 require_relative 'hud_controller'
+require_relative '../ui/mouse_element'
 
 module ScenicRoute
   module Controllers
@@ -41,6 +42,20 @@ module ScenicRoute
             IO::ImageManager.image(:mouse_left_click)
           ], 45
         )
+
+        level_card_img = IO::ImageManager.image(:level_card)
+        @level_card_elements = IO::LevelManager.maps.map.with_index do |m, i|
+          items_per_row = 6
+          x = 100 + (i % items_per_row ? 100 * (i % items_per_row) : Game::WIDTH - level_card.width - 100)
+          y = (i / items_per_row) * 100 + 150
+          
+          UI::MouseElement.new(Entities::Point.new(x, y), level_card_img).on_click do
+            ControllerSupervisor.controller(TransitionController).cover_during do
+              sleep 1
+              ControllerSupervisor.load_map(m)
+            end
+          end
+        end
       end
 
       ##
@@ -50,18 +65,15 @@ module ScenicRoute
 
         case current_page
         when :level_select
-          level_card = IO::ImageManager.image(:level_card)
 
-          # Draw each level card, with two maps to a row
-          IO::LevelManager.maps.each.with_index do |m, i|
-            x = i.even? ? 100 : Game::WIDTH - level_card.width - 100
-            y = (i / 2.to_i) * 100 + 150
-            level_card.draw(x, y, 50)
-
-            @button_bounds[m] ||= [x, y, level_card.width, level_card.height]
-
-            IO::FontManager.font(30).draw_text(
-              m.metadata.name, x + 15, y + 15, 50, 1, 1, 0xFF000000
+          # Draw each level card
+          @level_card_elements.each.with_index do |el, i|
+            map = IO::LevelManager.maps[i]
+            el.draw_element(50)
+            IO::FontManager.font(30).draw_text_rel(
+              map.metadata.name,
+              el.point.x + el.image.width / 2, el.point.y + el.image.height / 2,
+              50, 0.5, 0.5, 1, 1, 0xFF000000
             )
           end
         when :title
@@ -81,21 +93,7 @@ module ScenicRoute
         super
         return if id != Gosu::MS_LEFT || !on_menu?
 
-        case current_page
-        when :level_select
-          @button_bounds.each do |map, bound|
-            x, y, width, height = bound
-            if mouse_point.x >= x && mouse_point.y >= y \
-              && mouse_point.x <= x + width && mouse_point.y <= y + height
-              self.on_menu = false
-
-              ControllerSupervisor.controller(TransitionController).cover_during do
-                sleep 1
-                ControllerSupervisor.load_map(map)
-              end
-            end
-          end
-        when :title
+        if current_page == :title
           ControllerSupervisor.controller(TransitionController).cover_during do
             sleep 1
             self.current_page = :level_select
