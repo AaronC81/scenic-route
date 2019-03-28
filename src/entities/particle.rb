@@ -2,7 +2,7 @@ module ScenicRoute
   module Entities
     ##
     # Particles are images which have their properties changed dynamically each
-    # tick by a {UI::ParticleController}. A particle's opacity fades over its
+    # tick by a {Controllers::ParticleController}. A particle's opacity fades over its
     # lifetime.
     class Particle
       attr_accessor :point, :speed_x, :speed_y, :rotation, :angular_velocity,

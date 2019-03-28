@@ -2,7 +2,7 @@ require 'set'
 require_relative '../io/save_manager'
 
 module ScenicRoute
-  module UI
+  module Controllers
     ##
     # Controllers must register with this supervisor, which will then dispatch
     # event calls.

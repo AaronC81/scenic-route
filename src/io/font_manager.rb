@@ -1,4 +1,4 @@
-require_relative '../ui/controller_supervisor'
+require_relative '../controllers/controller_supervisor'
 
 module ScenicRoute
   module IO
@@ -20,7 +20,7 @@ module ScenicRoute
       # @param [Numeric] size
       # @return [Gosu::Font] 
       def self.font(size)
-        @@loaded_fonts[size] ||= Gosu::Font.new(UI::ControllerSupervisor.window,
+        @@loaded_fonts[size] ||= Gosu::Font.new(Controllers::ControllerSupervisor.window,
           SILKSCREEN_PATH, size)
       end
     end

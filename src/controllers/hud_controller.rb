@@ -7,7 +7,7 @@ require_relative 'transition_controller'
 require_relative '../io/level_manager'
 
 module ScenicRoute
-  module UI
+  module Controllers
     ##
     # Handles drawing a HUD on the screen. This includes the overall score,
     # station scorecards, medal, and next level button.

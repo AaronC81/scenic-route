@@ -1,7 +1,7 @@
 require_relative 'controller'
 
 module ScenicRoute
-  module UI
+  module Controllers
     ##
     # Enables the creation of animations, which rotate between images after a 
     # certain number of ticks.

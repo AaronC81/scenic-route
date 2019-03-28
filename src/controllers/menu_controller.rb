@@ -9,7 +9,7 @@ require_relative 'transition_controller'
 require_relative 'hud_controller'
 
 module ScenicRoute
-  module UI
+  module Controllers
     ##
     # Handles drawing the menu; that is, everything displayed when the map is
     # not being shown.

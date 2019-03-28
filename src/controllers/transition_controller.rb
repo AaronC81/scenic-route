@@ -1,7 +1,7 @@
 require_relative 'controller'
 
 module ScenicRoute
-  module UI
+  module Controllers
     ##
     # Draws a transition animation when required.
     class TransitionController < Controller

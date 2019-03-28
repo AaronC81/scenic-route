@@ -2,7 +2,7 @@ require_relative 'controller_supervisor'
 require_relative '../entities/point'
 
 module ScenicRoute
-  module UI
+  module Controllers
     ##
     # An abstract class representing something which needs to respond to game
     # events.

@@ -4,7 +4,7 @@ require_relative 'map_controller'
 require_relative 'controller_supervisor'
 
 module ScenicRoute
-  module UI
+  module Controllers
     ##
     # Handles drawing a background to the window.
     class BackgroundController < Controller

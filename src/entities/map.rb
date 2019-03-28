@@ -23,11 +23,11 @@ module ScenicRoute
       attr_reader :tile_set
 
       ##
-      # @return [UI::MapController] The controller which is drawing this map.
+      # @return [Controllers::MapController] The controller which is drawing this map.
       attr_accessor :controller
       
       ##
-      # @return [UI::MapMetadata] The metadata for this map.
+      # @return [Controllers::MapMetadata] The metadata for this map.
       attr_accessor :metadata
 
       ##

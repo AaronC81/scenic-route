@@ -4,7 +4,7 @@ require_relative '../io/font_manager'
 require_relative 'animation_controller'
 
 module ScenicRoute
-  module UI
+  module Controllers
     ##
     # Draws dialogue for the currently loaded map.
     class DialogueController < Controller

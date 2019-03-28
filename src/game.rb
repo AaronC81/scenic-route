@@ -3,20 +3,20 @@ require_relative 'tiles/tile_manager'
 require_relative 'entities/map'
 require_relative 'entities/route'
 require_relative 'entities/point'
-require_relative 'ui/map_controller'
-require_relative 'ui/controller_supervisor'
+require_relative 'controllers/map_controller'
+require_relative 'controllers/controller_supervisor'
 require_relative 'io/map_loader'
 require_relative 'entities/station_object'
 require_relative 'gameplay/scoring'
 require_relative 'entities/landmark_object'
-require_relative 'ui/background_controller'
-require_relative 'ui/hud_controller'
-require_relative 'ui/particle_controller'
+require_relative 'controllers/background_controller'
+require_relative 'controllers/hud_controller'
+require_relative 'controllers/particle_controller'
 require_relative 'entities/particle'
 require_relative 'entities/obstacle_object'
-require_relative 'ui/dialogue_controller'
-require_relative 'ui/menu_controller'
-require_relative 'ui/transition_controller'
+require_relative 'controllers/dialogue_controller'
+require_relative 'controllers/menu_controller'
+require_relative 'controllers/transition_controller'
 
 module ScenicRoute
   ##
@@ -55,19 +55,19 @@ module ScenicRoute
 
       Gosu::enable_undocumented_retrofication
       
-      UI::ControllerSupervisor.window = self
+      Controllers::ControllerSupervisor.window = self
 
       IO::MapLoader.load_map('res/levels/0.srlay', Tiles::TileManager.tile_set(:world))
 
-      UI::MapController.new(nil)
+      Controllers::MapController.new(nil)
 
-      UI::DialogueController.new
-      UI::BackgroundController.new
-      UI::HudController.new
-      UI::ParticleController.new
+      Controllers::DialogueController.new
+      Controllers::BackgroundController.new
+      Controllers::HudController.new
+      Controllers::ParticleController.new
       
-      UI::MenuController.new
-      UI::TransitionController.new
+      Controllers::MenuController.new
+      Controllers::TransitionController.new
     end 
 
     ##
@@ -88,7 +88,7 @@ module ScenicRoute
     # controllers.
     def draw
       scale(width_scaling, height_scaling, 0, 0) do
-        UI::ControllerSupervisor.dispatch(:draw)
+        Controllers::ControllerSupervisor.dispatch(:draw)
       end
     end
 
@@ -96,21 +96,21 @@ module ScenicRoute
     # Invoked by Gosu {FPS} times per second. Dispatches the :update event to
     # all controllers.
     def update
-      UI::ControllerSupervisor.dispatch(:update)
+      Controllers::ControllerSupervisor.dispatch(:update)
     end
 
     ##
     # Invoked by Gosu when any button is pressed. Dispatches the :button_down  
     # event to all controllers.
     def button_down(id)
-      UI::ControllerSupervisor.dispatch(:button_down, id)
+      Controllers::ControllerSupervisor.dispatch(:button_down, id)
     end
 
     ##
     # Invoked by Gosu when any button is released. Dispatches the :button_up  
     # event to all controllers.
     def button_up(id)
-      UI::ControllerSupervisor.dispatch(:button_up, id)
+      Controllers::ControllerSupervisor.dispatch(:button_up, id)
     end
 
     ##

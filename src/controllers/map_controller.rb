@@ -5,7 +5,7 @@ require_relative 'dialogue_controller'
 require_relative '../io/save_manager'
 
 module ScenicRoute
-  module UI
+  module Controllers
     ##
     # Handles invocation of map-drawing methods and responds to track change
     # controls.

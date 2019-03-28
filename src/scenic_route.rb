@@ -26,10 +26,9 @@ module ScenicRoute
   module Tiles end
 
   ##
-  # Contains classes which draw HUD elements, menus, non-essential gameplay
-  # items, or anything else loosely graphical. This mostly houses the
-  # controller architecture, which is extensively used throughout this codebase.
-  module UI end
+  # Houses the controller architecture, which is extensively used throughout
+  # this codebase.
+  module Controllers end
 end
 
 ScenicRoute::Game.new.show

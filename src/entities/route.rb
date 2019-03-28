@@ -1,5 +1,5 @@
-require_relative '../ui/controller_supervisor'
-require_relative '../ui/particle_controller'
+require_relative '../controllers/controller_supervisor'
+require_relative '../controllers/particle_controller'
 require_relative '../io/image_manager'
 
 module ScenicRoute
@@ -192,7 +192,7 @@ module ScenicRoute
             x = base_x + rand(map.tile_set.width)
             y = base_y + rand(map.tile_set.height)
 
-            UI::ControllerSupervisor.controller(UI::ParticleController).spawn(
+            Controllers::ControllerSupervisor.controller(Controllers::ParticleController).spawn(
               Entities::Particle.new(
                 Entities::Point.new(x, y), img, -50..50, -50..50, -360..360, -360..360, 0.5, 1
               )

@@ -8,6 +8,7 @@ module ScenicRoute
     ##
     # Handles reading and writing routes for each map on the disc.
     class SaveManager
+      # TODO: add autosave/load
       ##
       # The comment written to the top of every save file.
       COMMENT = "Scenic Route save file. Don't edit this; The Conductor wouldn't be happy..."

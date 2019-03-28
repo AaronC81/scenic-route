@@ -1,7 +1,7 @@
 require_relative 'controller'
 
 module ScenicRoute
-  module UI
+  module Controllers
     ##
     # Handles drawing {Entities::Particle} instances to the screen.
     class ParticleController < Controller
