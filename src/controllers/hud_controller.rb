@@ -5,6 +5,7 @@ require_relative '../io/image_manager'
 require_relative '../io/font_manager'
 require_relative 'transition_controller'
 require_relative '../io/level_manager'
+require_relative '../ui/mouse_element'
 
 module ScenicRoute
   module Controllers
@@ -19,7 +20,20 @@ module ScenicRoute
 
         @previous_valid_total_score = 0
         @previous_valid_scores = Hash.new(0)
-        @next_level_button_showing = false
+
+        next_level_img = IO::ImageManager.image(:button_next_level)
+        @next_level_button = UI::MouseElement.new(
+          Entities::Point.new(Game::WIDTH - next_level_img.width - 20, 20),
+          next_level_img
+        ).on_click do
+          ControllerSupervisor.controller(TransitionController).cover_during do
+            sleep 1
+            
+            new_map_idx = IO::LevelManager.maps.map { |m| m.metadata.id }.index(map.metadata.id) + 1
+            new_map = IO::LevelManager.maps[new_map_idx]
+            ControllerSupervisor.load_map(new_map)
+          end
+        end
       end
 
       ##
@@ -27,7 +41,6 @@ module ScenicRoute
       def reset
         @previous_valid_total_score = 0
         @previous_valid_scores = Hash.new(0)
-        @next_level_button_showing = false
       end
 
       ##
@@ -67,29 +80,12 @@ module ScenicRoute
 
         # Draw the next level button, if necessary
         if medal != 'none'
-          @next_level_button_showing = true
-          next_level_img = IO::ImageManager.image(:button_next_level)
-          next_level_img.draw(Game::WIDTH - next_level_img.width - 20, 20, 10)
+          @next_level_button.draw_element(10)
+          @next_level_button.enabled = true
           IO::FontManager.font(25).draw_text("Next\nLevel",
-            Game::WIDTH - next_level_img.width + 10, 25, 10, 1, 1, 0xFF000000)
+            @next_level_button.point.x + 10, 25, 10, 1, 1, 0xFF000000)
         else
-          @next_level_button_showing = false
-        end
-      end
-
-      ##
-      # Handles clicks on the next level button.
-      def button_down(id)
-        # TODO: not actually right coords but OK
-        return unless id == Gosu::MS_LEFT && @next_level_button_showing &&
-          mouse_point.x > 668 && mouse_point.y < 60 
-
-        ControllerSupervisor.controller(TransitionController).cover_during do
-          sleep 1
-          
-          new_map_idx = IO::LevelManager.maps.map { |m| m.metadata.id }.index(map.metadata.id) + 1
-          new_map = IO::LevelManager.maps[new_map_idx]
-          ControllerSupervisor.load_map(new_map)
+          @next_level_button.enabled = false
         end
       end
     end
