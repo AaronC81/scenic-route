@@ -30,6 +30,7 @@ module ScenicRoute
       ##
       # Creates a new menu controller.
       def initialize
+        # TODO map preview, show medal
         super
 
         @button_bounds = {}
@@ -50,9 +51,11 @@ module ScenicRoute
           y = (i / items_per_row) * 100 + 150
           
           UI::MouseElement.new(Entities::Point.new(x, y), level_card_img).on_click do
-            ControllerSupervisor.controller(TransitionController).cover_during do
-              sleep 1
-              ControllerSupervisor.load_map(m)
+            if !IO::LevelManager.locked?(m)
+              ControllerSupervisor.controller(TransitionController).cover_during do
+                sleep 1
+                ControllerSupervisor.load_map(m)
+              end
             end
           end
         end
@@ -71,7 +74,7 @@ module ScenicRoute
             map = IO::LevelManager.maps[i]
             el.draw_element(50)
             IO::FontManager.font(30).draw_text_rel(
-              map.metadata.name,
+              IO::LevelManager.locked?(map) ? "?" : map.metadata.name,
               el.point.x + el.image.width / 2, el.point.y + el.image.height / 2,
               50, 0.5, 0.5, 1, 1, 0xFF000000
             )
