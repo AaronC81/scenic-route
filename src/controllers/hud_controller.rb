@@ -6,6 +6,7 @@ require_relative '../io/font_manager'
 require_relative 'transition_controller'
 require_relative '../io/level_manager'
 require_relative '../ui/mouse_element'
+require_relative '../io/save_manager'
 
 module ScenicRoute
   module Controllers
@@ -28,6 +29,7 @@ module ScenicRoute
           IO::ImageManager.image(:button_next_level_hover)
         ).on_click do
           ControllerSupervisor.controller(TransitionController).cover_during do
+            IO::SaveManager.save_map_state(map)
             sleep 1
             
             new_map_idx = IO::LevelManager.maps.map { |m| m.metadata.id }.index(map.metadata.id) + 1
