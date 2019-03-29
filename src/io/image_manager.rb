@@ -18,6 +18,7 @@ module ScenicRoute
         mouse: 'res/img/mouse.png',
         dialogue_background: 'res/img/dialogue_background.png',
         level_card: 'res/img/level_card.png',
+        level_card_hover: 'res/img/level_card_hover.png',
         button_next_level: 'res/img/button_next_level.png',
         button_next_level_hover: 'res/img/button_next_level_hover.png',
         logo: 'res/img/logo.png'

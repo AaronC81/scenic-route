@@ -50,7 +50,8 @@ module ScenicRoute
           x = 100 + (i % items_per_row ? 100 * (i % items_per_row) : Game::WIDTH - level_card.width - 100)
           y = (i / items_per_row) * 100 + 150
           
-          UI::MouseElement.new(Entities::Point.new(x, y), level_card_img).on_click do
+          UI::MouseElement.new(Entities::Point.new(x, y), level_card_img,
+            IO::ImageManager.image(:level_card_hover)).on_click do
             if !IO::LevelManager.locked?(m)
               ControllerSupervisor.controller(TransitionController).cover_during do
                 sleep 1
