@@ -88,11 +88,16 @@ module ScenicRoute
       end
 
       ##
+      # @returns [Boolean] True if the mouse is over this element.
+      def hovering?
+        within_bounds?(mouse_point)
+      end
+
+      ##
       # Draws the appropriate image for this element to the screen. Passes
       # varargs to Gosu's Image draw method, after x and y.
       def draw_element(*args)
-        image_to_draw = within_bounds?(mouse_point) && !image_hover.nil? \
-          ? image_hover : image
+        image_to_draw = hovering? && !image_hover.nil? ? image_hover : image
         image_to_draw.draw(point.x, point.y, *args)
       end
     end
