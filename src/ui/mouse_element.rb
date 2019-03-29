@@ -36,6 +36,16 @@ module ScenicRoute
       attr_accessor :click_handlers
 
       ##
+      # @return [Array<Proc>] The procs which will run when this element is
+      #   hovered over.
+      attr_accessor :hover_handlers
+
+      ##
+      # @return [Array<Proc>] The procs which will run when this element is
+      #   unhovered.
+      attr_accessor :unhover_handlers
+
+      ##
       # Create a new mouse element.
       def initialize(point, image, image_hover=nil)
         super()
@@ -43,6 +53,8 @@ module ScenicRoute
         @image = image
         @image_hover = image_hover
         @click_handlers = []
+        @hover_handlers = []
+        @unhover_handlers = []
         @enabled = true
 
         puts "WARNING: different image size for hover on MouseElement" \
@@ -70,10 +82,40 @@ module ScenicRoute
       end
 
       ##
+      # Register a new hover handler on this element. The hover handler should
+      # be passed as a block.
+      #
+      # @return [MouseElement] Itself; this method may be chained.
+      def on_hover(&block)
+        hover_handlers << block
+        self
+      end
+
+      ##
+      # Register a new unhover handler on this element. The unhover handler 
+      # should be passed as a block.
+      #
+      # @return [MouseElement] Itself; this method may be chained.
+      def on_unhover(&block)
+        unhover_handlers << block
+        self
+      end
+
+      ##
       # Fire all click handlers on click.
       def button_down(id)
         click_handlers.each(&:call) if enabled? && id == Gosu::MS_LEFT &&
           within_bounds?(mouse_point)
+      end
+
+      ##
+      # Fires all hover handlers on hover beginning.
+      def update
+        @prev_hovering ||= false
+        return unless @prev_hovering != hovering?
+
+        (hovering? ? hover_handlers : unhover_handlers).each(&:call) if enabled?
+        @prev_hovering = hovering?
       end
 
       ##
