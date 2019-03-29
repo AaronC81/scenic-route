@@ -28,6 +28,11 @@ module ScenicRoute
       attr_accessor :current_page
 
       ##
+      # @return [Entities::Map] The map which is currently being hovered over
+      #   in the level selector.
+      attr_accessor :hovered_map
+
+      ##
       # Creates a new menu controller.
       def initialize
         # TODO map preview, show medal
@@ -58,6 +63,10 @@ module ScenicRoute
                 ControllerSupervisor.load_map(m)
               end
             end
+          end.on_hover do
+            self.hovered_map = m
+          end.on_unhover do
+            self.hovered_map = nil
           end
         end
       end
@@ -80,6 +89,17 @@ module ScenicRoute
               50, 0.5, 0.5, 1, 1, 0xFF000000
             )
           end
+
+          # Draw the map preview
+          unless hovered_map.nil?
+            # Resize the map so it's 480 pixels wide
+            target_width = 480.0
+            map_scale_factor = target_width / hovered_map.pixel_width
+            Gosu.scale(map_scale_factor) do
+              hovered_map&.draw(800 / map_scale_factor, 0, 50)
+            end
+          end
+
         when :title
           logo = IO::ImageManager.image(:logo)
 
