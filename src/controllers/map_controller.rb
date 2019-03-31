@@ -87,6 +87,17 @@ module ScenicRoute
           Gosu.draw_rect(tile_corner_x, tile_corner_y, map.tile_set.width,
             map.tile_set.height, 0x77FFFF00, 10) if controls_enabled? 
         end
+
+        # Draw the station colour indicators
+        map.tile_objects.each do |obj|
+          next unless obj.is_a?(Entities::StationObject)
+
+          tile_corner_x = obj.point.x * map.tile_set.width + origin.x + 18
+          tile_corner_y = obj.point.y * map.tile_set.height + origin.y + 10
+
+          colour = Entities::StationObject::BACKGROUND_COLORS[obj.number]
+          Gosu.draw_rect(tile_corner_x, tile_corner_y, 28, 22, colour, 9)
+        end
       end
 
       ##
