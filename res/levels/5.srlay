@@ -1,0 +1,43 @@
+5
+---
+5f0f7310-363b-0137-5622-64006afdaf02
+---
+4
+---
+8 10 17
+---
+Now for the real challenge
+to begin!
+You won't see many islands
+with one pair of stations.
+This island has two pairs
+of stations!
+One pair is red, and one
+pair is blue.
+You can only connect pairs
+of the same colour.
+This means you'll need two
+separate track routes!
+Each route is scored
+individually.
+Each route's score is
+shown in a coloured box.
+Your overall score is the
+lowest of these scores.
+So, try to average out
+the track lengths!
+Give it a go; you'll get
+the hang of it.
+---
+.D^^^^^^^^A.
+.<########>.
+.<########>.
+.<########>.
+.<########>.
+.<########>.
+.C________B.
+---
+StationObject 2,1 :east 1
+StationObject 2,5 :east 1
+StationObject 9,1 :west 2
+StationObject 9,5 :west 2
