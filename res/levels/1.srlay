@@ -1,43 +1,33 @@
-2
----
-55726160-30bc-0137-f1ff-64006afdaf02
----
 1
 ---
-5 18 26
+8764c819-46e1-4a18-bf54-36e33033ab00
 ---
-Good work on your very first
-track.
-There are plenty more to
-come!
-You may have noticed that
-each track is scored.
-Your score is shown in the
-top left of the screen.
-You get one point for each
-tile of track.
-This means you must make the
-longest track you can!
-After all, our passengers
-are here for the scenery.
-Now try making the longest
-route between these stations.
-Try "snaking" the track
-around the space you have.
-You'll receive a medal based
-on how well you've done.
-Your medal is shown to the
-right of your score.
-Go for the gold medal on
-this one!
+0
+---
+1 1 1
+---
+Welcome to Scenic Route!
+
+You'll be started building
+tracks in no time.
+In each level, you must build
+the longest track you can.
+Our passengers want to see
+all the island has to offer!
+Use the left mouse button to
+draw tracks.
+You can hold the left mouse
+button to keep drawing.
+The right mouse button erases
+tracks if you make a mistake.
+Draw a track along the island
+to connect the stations.
+Once you're done, click the
+"Next Level" button.
 ---
 .D^^^^^^^^A.
 .<########>.
-.<########>.
-.<########>.
-.<########>.
-.<########>.
 .C________B.
 ---
-StationObject 2,3 :east 1
-StationObject 9,3 :west 1
+StationObject 2,1 :east 1
+StationObject 9,1 :west 1

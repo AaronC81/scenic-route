@@ -1,31 +1,33 @@
-4
----
-ea9d98f0-30c2-0137-f202-64006afdaf02
----
 3
 ---
-10 20 26
+c917e4a0-30bd-0137-f200-64006afdaf02
 ---
-Hey!
-That's a landmark!
-Our passengers love seeing
-landmarks.
-So much so, you get double
-points for tracks near them!
-Tracks next to them will add
-2 to your score.
-You should always try to
-build next to landmarks!
-Build as tightly around the
-landmark as possible.
+2
 ---
-.D^A..D^^^A.
-.<#a^^d###>.
+5 10 20
+---
+Wow, this island is a funny
+shape, eh?
+Also, there's some trees on
+this island.
+Corporate have got a "save
+the environment" policy.
+So, we can't build tracks 
+through obstacles like trees.
+Looks like you'll have to 
+do some creative thinking!
+Don't worry, it'll get much
+harder than this...
+---
+.D^^^^^A....
+.<#####a^^A.
 .<########>.
-.Hiiiih###>.
-.<########>.
-.C________B.
+.<#####g##>.
+.<#####jb_B.
+.<#####j>...
+.C_____GB...
 ---
-StationObject 2,1 :south 1
-StationObject 2,4 :east 1
-LandmarkObject 8,2 :statue
+StationObject 2,5 :east 1
+StationObject 9,3 :west 1
+ObstacleObject 3,4 :tree
+ObstacleObject 2,1 :tree

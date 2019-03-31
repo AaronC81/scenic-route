@@ -1,33 +1,43 @@
-3
----
-c917e4a0-30bd-0137-f200-64006afdaf02
----
 2
 ---
-5 10 20
+55726160-30bc-0137-f1ff-64006afdaf02
 ---
-Wow, this island is a funny
-shape, eh?
-Also, there's some trees on
-this island.
-Corporate have got a "save
-the environment" policy.
-So, we can't build tracks 
-through obstacles like trees.
-Looks like you'll have to 
-do some creative thinking!
-Don't worry, it'll get much
-harder than this...
+1
 ---
-.D^^^^^A....
-.<#####a^^A.
+5 18 26
+---
+Good work on your very first
+track.
+There are plenty more to
+come!
+You may have noticed that
+each track is scored.
+Your score is shown in the
+top left of the screen.
+You get one point for each
+tile of track.
+This means you must make the
+longest track you can!
+After all, our passengers
+are here for the scenery.
+Now try making the longest
+route between these stations.
+Try "snaking" the track
+around the space you have.
+You'll receive a medal based
+on how well you've done.
+Your medal is shown to the
+right of your score.
+Go for the gold medal on
+this one!
+---
+.D^^^^^^^^A.
 .<########>.
-.<#####g##>.
-.<#####jb_B.
-.<#####j>...
-.C_____GB...
+.<########>.
+.<########>.
+.<########>.
+.<########>.
+.C________B.
 ---
-StationObject 2,5 :east 1
+StationObject 2,3 :east 1
 StationObject 9,3 :west 1
-ObstacleObject 3,4 :tree
-ObstacleObject 2,1 :tree
