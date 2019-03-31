@@ -57,8 +57,6 @@ module ScenicRoute
       
       Controllers::ControllerSupervisor.window = self
 
-      IO::MapLoader.load_map('res/levels/0.srlay', Tiles::TileManager.tile_set(:world))
-
       Controllers::MapController.new(nil)
 
       Controllers::DialogueController.new
