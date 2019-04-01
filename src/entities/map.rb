@@ -47,7 +47,6 @@ module ScenicRoute
       # @param [Array<Array<Symbol>>] layout
       # @param [TileSet] tile_set
       def initialize(layout, tile_set)
-        # TODO: validate maps
         @layout = layout
         @tile_set = tile_set
         @tile_objects = []
@@ -168,7 +167,6 @@ module ScenicRoute
       #
       # @return [Array<Symbol>] An ordered array of tile names.
       def tiles_at(point)
-        # TODO: Memoise these?
         route_tile_maps = routes.map(&:to_tile_hash).reduce(&:merge) || {}
         tile_object_maps = tile_objects.map { |o| [o.point, o] }.to_h
 

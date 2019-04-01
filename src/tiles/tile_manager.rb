@@ -9,7 +9,6 @@ module ScenicRoute
     class TileManager
       ##
       # A mapping of known tile set names to their filepaths and tile sizes.
-      # TODO: animate water
       TILE_SET_NAMES = {
         world: [WorldTileSet, 'res/img/world.png', 64, 64]
       }
