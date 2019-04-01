@@ -28,7 +28,6 @@ module ScenicRoute
       ##
       # Creates a new menu controller.
       def initialize
-        # TODO Show medal
         super
 
         @button_bounds = {}
@@ -57,6 +56,7 @@ module ScenicRoute
             end
           end.on_hover do
             self.hovered_map = m
+            IO::SaveManager.load_map_state(m)
           end.on_unhover do
             self.hovered_map = nil
           end
@@ -88,8 +88,16 @@ module ScenicRoute
             target_width = 480.0
             map_scale_factor = target_width / hovered_map.pixel_width
             Gosu.scale(map_scale_factor) do
-              hovered_map&.draw(800 / map_scale_factor, 0, 50)
+              hovered_map&.draw(800 / map_scale_factor, 70 / map_scale_factor, 50)
             end
+
+            score = Gameplay::Scoring.overall_score_for_map(hovered_map) || 0
+            IO::FontManager.font(30).draw_text("Score: #{score}", 810, 20, 50)
+
+            medal = hovered_map.metadata.medal_for(score)
+            medal_img = IO::ImageManager.image("medal_#{medal || 'none'}".to_sym)
+
+            medal_img.draw(Game::WIDTH - medal_img.width - 10, 10, 50)
           end
 
         when :title
