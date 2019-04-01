@@ -18,11 +18,6 @@ module ScenicRoute
       # TODO: this class is really messy
       
       ##
-      # @return [Boolean] Whether the menu is currently being displayed.
-      attr_accessor :on_menu
-      alias on_menu? on_menu
-
-      ##
       # @return [Symbol] The current page of the menu. Either :title or
       #   :level_select.
       attr_accessor :current_page
@@ -39,7 +34,6 @@ module ScenicRoute
         super
 
         @button_bounds = {}
-        @on_menu = true
         @current_page = :title
 
         @mouse_click_anim = AnimationController.create_animation(
@@ -57,7 +51,7 @@ module ScenicRoute
           
           UI::MouseElement.new(Entities::Point.new(x, y), level_card_img,
             IO::ImageManager.image(:level_card_hover)).on_click do
-            if !IO::LevelManager.locked?(m)
+            if !IO::LevelManager.locked?(m) && map.nil?
               ControllerSupervisor.controller(TransitionController).cover_during do
                 sleep 1
                 ControllerSupervisor.load_map(m)
@@ -115,7 +109,7 @@ module ScenicRoute
       # Handles menu button clicks.
       def button_down(id)
         super
-        return if id != Gosu::MS_LEFT || !on_menu?
+        return if id != Gosu::MS_LEFT
 
         if current_page == :title
           ControllerSupervisor.controller(TransitionController).cover_during do
