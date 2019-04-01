@@ -25,6 +25,10 @@ module ScenicRoute
       }
 
       ##
+      # Holds already loaded images.
+      MEMOIZED_IMAGES = {}
+
+      ##
       # Loads an image from a file given its symbolic name, which must be a key
       # in {IMAGE_PATHS}.
       #
@@ -34,9 +38,7 @@ module ScenicRoute
         image_path = IMAGE_PATHS[name]
         raise 'no such image' if image_path.nil?
 
-        # TODO: memoise images
-
-        Gosu::Image.new(image_path)
+        (MEMOIZED_IMAGES[name] ||= Gosu::Image.new(image_path))
       end
     end
   end
