@@ -14,9 +14,7 @@ module ScenicRoute
     ##
     # Handles drawing the menu; that is, everything displayed when the map is
     # not being shown.
-    class MenuController < Controller
-      # TODO: this class is really messy
-      
+    class MenuController < Controller      
       ##
       # @return [Symbol] The current page of the menu. Either :title or
       #   :level_select.
@@ -30,7 +28,7 @@ module ScenicRoute
       ##
       # Creates a new menu controller.
       def initialize
-        # TODO map preview, show medal
+        # TODO Show medal
         super
 
         @button_bounds = {}
