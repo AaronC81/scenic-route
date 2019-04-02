@@ -121,6 +121,8 @@ module ScenicRoute
           completed_route.sparkle
         end
 
+        IO::SaveManager.save_map_state(self)
+
         true
       end
 
