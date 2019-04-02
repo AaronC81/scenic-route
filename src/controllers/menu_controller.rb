@@ -147,7 +147,7 @@ module ScenicRoute
           end
         end
 
-        if id == Gosu::KB_ESCAPE && !map.nil?
+        if id == Gosu::KB_ESCAPE
           self.paused = !paused
         end
       end
