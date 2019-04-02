@@ -12,7 +12,7 @@ module ScenicRoute
     class MapController < Controller
       ##
       # The map which this controller is associated with.
-      attr_reader :map
+      attr_accessor :map
 
       ##
       # The point at which this map should be drawn.
