@@ -84,6 +84,14 @@ module ScenicRoute
           IO::FontManager.font(70).draw_text_rel(
             "Paused", Game::WIDTH / 2, 50, 50, 0.5, 0.5, 1, 1, 0xFFFFFFFF
           )
+          IO::FontManager.font(40).draw_text_rel(
+            "Use the + and - keys to change volume", Game::WIDTH / 2, 150, 50,
+            0.5, 0.5, 1, 1, 0xFFFFFFFF
+          )
+          IO::FontManager.font(40).draw_text_rel(
+            "Press Enter to return to the menu", Game::WIDTH / 2, 300, 50,
+            0.5, 0.5, 1, 1, 0xFFFFFFFF
+          )
           return
         elsif ControllerSupervisor.controller(DialogueController).dialogue_queue.empty?
           ControllerSupervisor.controller(MapController).controls_enabled = true
@@ -149,6 +157,12 @@ module ScenicRoute
 
         if id == Gosu::KB_ESCAPE
           self.paused = !paused
+        end
+
+        if (id == Gosu::KB_ENTER || id == Gosu::KB_RETURN) && paused
+          ControllerSupervisor.controller(MapController).map = nil
+          ControllerSupervisor.controller(DialogueController).dialogue_queue = []
+          self.paused = false
         end
       end
     end
