@@ -123,6 +123,7 @@ module ScenicRoute
         return if id != Gosu::MS_LEFT
 
         if current_page == :title
+          IO::SampleManager.sample(:begin).play
           ControllerSupervisor.controller(TransitionController).cover_during do
             sleep 1
             self.current_page = :level_select

@@ -14,7 +14,8 @@ module ScenicRoute
         select2: 'res/sound/select2.wav',
         track_complete: 'res/sound/track_complete.wav',
         speak: 'res/sound/speak.wav',
-        remove: 'res/sound/remove.wav'
+        remove: 'res/sound/remove.wav',
+        begin: 'res/sound/begin.wav'
       }
 
       ##
