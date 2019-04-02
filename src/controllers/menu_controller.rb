@@ -8,6 +8,7 @@ require_relative '../io/save_manager'
 require_relative 'transition_controller'
 require_relative 'hud_controller'
 require_relative '../ui/mouse_element'
+require_relative '../io/sample_manager'
 
 module ScenicRoute
   module Controllers
@@ -49,6 +50,7 @@ module ScenicRoute
           UI::MouseElement.new(Entities::Point.new(x, y), level_card_img,
             IO::ImageManager.image(:level_card_hover)).on_click do
             if !IO::LevelManager.locked?(m) && map.nil?
+              IO::SampleManager.sample(:select2).play
               ControllerSupervisor.controller(TransitionController).cover_during do
                 sleep 1
                 ControllerSupervisor.load_map(m)
@@ -57,6 +59,7 @@ module ScenicRoute
           end.on_hover do
             self.hovered_map = m
             IO::SaveManager.load_map_state(m)
+            IO::SampleManager.sample(:hover).play
           end.on_unhover do
             self.hovered_map = nil
           end
