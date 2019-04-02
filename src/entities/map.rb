@@ -92,18 +92,19 @@ module ScenicRoute
         return false if routes.flat_map(&:points).include?(point)
 
         inserted = false
+        completed_route = nil
         routes.each do |route|
           # If this point fits at either end of an existing route and is not
           # complete, add it and leave the function
           if !route.complete? && route.points.first.adjacent_to?(point)
             route.points.insert(0, point)
             inserted = true
-            route.sparkle if route.complete?
+            completed_route = route if route.complete?
             break
           elsif !route.complete? && route.points.last.adjacent_to?(point)
             route.points << point
             inserted = true
-            route.sparkle if route.complete?
+            completed_route = route if route.complete?
             break
           end
         end
@@ -112,6 +113,14 @@ module ScenicRoute
         # one instead
         routes << Route.new(self, [point]) unless inserted
         join_adjacent_routes
+
+        if completed_route.nil?
+          IO::SampleManager.sample(:place).play
+        else
+          IO::SampleManager.sample(:track_complete).play
+          completed_route.sparkle
+        end
+
         true
       end
 
@@ -156,6 +165,9 @@ module ScenicRoute
 
         return false unless removed
         join_adjacent_routes
+
+        IO::SampleManager.sample(:remove).play if removed
+
         true
       end
 
