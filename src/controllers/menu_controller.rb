@@ -57,12 +57,12 @@ module ScenicRoute
               end
             end
           end.on_hover do
-            next unless current_page == :level_select
+            next unless current_page == :level_select && map.nil? 
             self.hovered_map = m
             IO::SaveManager.load_map_state(m)
             IO::SampleManager.sample(:hover).play
           end.on_unhover do
-            next unless current_page == :level_select
+            next unless current_page == :level_select && map.nil? 
             self.hovered_map = nil
           end
         end
