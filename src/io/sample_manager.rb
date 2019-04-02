@@ -12,7 +12,8 @@ module ScenicRoute
         place: 'res/sound/place.wav',
         select1: 'res/sound/select1.wav',
         select2: 'res/sound/select2.wav',
-        track_complete: 'res/sound/track_complete.wav'
+        track_complete: 'res/sound/track_complete.wav',
+        speak: 'res/sound/speak.wav'
       }
 
       ##

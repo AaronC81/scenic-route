@@ -1,6 +1,7 @@
 require_relative 'controller'
 require_relative '../io/image_manager'
 require_relative '../io/font_manager'
+require_relative '../io/sample_manager'
 require_relative 'animation_controller'
 
 module ScenicRoute
@@ -82,6 +83,8 @@ module ScenicRoute
         if @current_index_tick_counter % CHARACTER_TIME == 0 && !current_done?
           @current_index_tick_counter = 0
           @current_index += 1 
+          IO::SampleManager.sample(:speak).play unless
+            dialogue_queue.first[@current_index] == ' '
         end
 
         @character_bob_tick_counter += 1
