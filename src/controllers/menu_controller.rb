@@ -81,6 +81,9 @@ module ScenicRoute
           # Draw a pause menu
           ControllerSupervisor.controller(MapController).controls_enabled = false
           Gosu.draw_rect(0, 0, Game::WIDTH, Game::HEIGHT, 0xAA000000, 50)
+          IO::FontManager.font(70).draw_text_rel(
+            "Paused", Game::WIDTH / 2, 50, 50, 0.5, 0.5, 1, 1, 0xFFFFFFFF
+          )
           return
         elsif ControllerSupervisor.controller(DialogueController).dialogue_queue.empty?
           ControllerSupervisor.controller(MapController).controls_enabled = true
