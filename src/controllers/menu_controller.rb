@@ -27,6 +27,12 @@ module ScenicRoute
       attr_accessor :hovered_map
 
       ##
+      # @return [Boolean] Whether the game is currently paused, showing the
+      #   pause menu.
+      attr_accessor :paused 
+      alias paused? paused
+
+      ##
       # Creates a new menu controller.
       def initialize
         super
@@ -71,6 +77,15 @@ module ScenicRoute
       ##
       # Draws the menu to the screen, if the map is not being shown.
       def draw
+        if paused?
+          # Draw a pause menu
+          ControllerSupervisor.controller(MapController).controls_enabled = false
+          Gosu.draw_rect(0, 0, Game::WIDTH, Game::HEIGHT, 0xAA000000, 50)
+          return
+        elsif ControllerSupervisor.controller(DialogueController).dialogue_queue.empty?
+          ControllerSupervisor.controller(MapController).controls_enabled = true
+        end
+
         return unless map.nil?
 
         case current_page
@@ -120,14 +135,17 @@ module ScenicRoute
       # Handles menu button clicks.
       def button_down(id)
         super
-        return if id != Gosu::MS_LEFT
 
-        if current_page == :title
+        if id == Gosu::MS_LEFT && current_page == :title
           IO::SampleManager.sample(:begin).play
           ControllerSupervisor.controller(TransitionController).cover_during do
             sleep 1
             self.current_page = :level_select
           end
+        end
+
+        if id == Gosu::KB_ESCAPE && !map.nil?
+          self.paused = !paused
         end
       end
     end
