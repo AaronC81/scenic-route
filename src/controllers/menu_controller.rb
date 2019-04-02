@@ -49,7 +49,7 @@ module ScenicRoute
           
           UI::MouseElement.new(Entities::Point.new(x, y), level_card_img,
             IO::ImageManager.image(:level_card_hover)).on_click do
-            if !IO::LevelManager.locked?(m) && map.nil?
+            if !IO::LevelManager.locked?(m) && map.nil? && current_page == :level_select
               IO::SampleManager.sample(:select2).play
               ControllerSupervisor.controller(TransitionController).cover_during do
                 sleep 1
@@ -57,10 +57,12 @@ module ScenicRoute
               end
             end
           end.on_hover do
+            next unless current_page == :level_select
             self.hovered_map = m
             IO::SaveManager.load_map_state(m)
             IO::SampleManager.sample(:hover).play
           end.on_unhover do
+            next unless current_page == :level_select
             self.hovered_map = nil
           end
         end
