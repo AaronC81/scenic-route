@@ -17,14 +17,14 @@ module ScenicRoute
       #   saved.
       def self.save_directory_root
         case Platform::IMPL
-        when :mswin
+        when :mswin, :mingw
           File.join(Dir.home, 'AppData', 'Roaming', 'ScenicRoute')
         when :linux
           File.join(Dir.home, '.local', 'share', 'scenic-route')
         when :macosx
           File.join(Dir.home, 'Library', 'ScenicRoute')
         else
-          nil
+          raise "unknown OS, so can't save data"
         end
       end
 
