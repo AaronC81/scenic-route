@@ -1,0 +1,30 @@
+6
+---
+8dd62270-3947-0137-388f-64006afdaf02
+---
+5
+---
+8 10 17
+---
+It looks like you've got
+the hang of things!
+I'll leave you to it from
+now on.
+Enjoy!
+---
+.....D^A.....
+.....<#>.....
+..D^^d#a^^A..
+..<#######>..
+D^d#######a^A
+<###########>
+C_c#######b_B
+..<#######>..
+..C__c#b__B..
+.....<#>.....
+.....C_B.....
+---
+StationObject 1,5 :east 1
+StationObject 6,9 :north 1
+StationObject 11,5 :west 2
+StationObject 6,1 :south 2
