@@ -85,10 +85,6 @@ module ScenicRoute
             "Paused", Game::WIDTH / 2, 50, 50, 0.5, 0.5, 1, 1, 0xFFFFFFFF
           )
           IO::FontManager.font(40).draw_text_rel(
-            "Use the + and - keys to change volume", Game::WIDTH / 2, 150, 50,
-            0.5, 0.5, 1, 1, 0xFFFFFFFF
-          )
-          IO::FontManager.font(40).draw_text_rel(
             "Press Enter to return to the menu", Game::WIDTH / 2, 300, 50,
             0.5, 0.5, 1, 1, 0xFFFFFFFF
           )
