@@ -9,14 +9,16 @@ module ScenicRoute
       # The background colours which will be used by each station's scorecard.
       BACKGROUND_COLORS = {
         1 => 0xFF0000FF,
-        2 => 0xFFFF0000
+        2 => 0xFFFF0000,
+        3 => 0xFF00FF00
       }
 
       ##
       # The text colours which will be used by each station's scorecard.
       TEXT_COLORS = {
         1 => 0xFFFFFFFF,
-        2 => 0xFFFFFFFF
+        2 => 0xFFFFFFFF,
+        3 => 0xFFFFFFFF
       }
 
       ##
@@ -24,7 +26,8 @@ module ScenicRoute
       # score is no longer current.
       INACTIVE_TEXT_COLORS = {
         1 => 0xFF808080,
-        2 => 0xFF808080
+        2 => 0xFF808080,
+        3 => 0xFF808080
       }
 
       ##
