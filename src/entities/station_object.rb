@@ -18,7 +18,7 @@ module ScenicRoute
       TEXT_COLORS = {
         1 => 0xFFFFFFFF,
         2 => 0xFFFFFFFF,
-        3 => 0xFFFFFFFF
+        3 => 0xFF000000
       }
 
       ##
