@@ -1,0 +1,25 @@
+11
+---
+e3cbbc00-3a1c-0137-3897-64006afdaf02
+---
+11
+---
+0 0 0
+---
+
+---
+D^^^^^^^^^^^^^^^A
+<###############>
+<###############>
+<###############>
+<###############>
+C_______________B
+---
+StationObject 1,1 :south 1
+StationObject 1,4 :north 1
+StationObject 8,1 :south 2
+StationObject 8,4 :north 2
+StationObject 15,1 :south 3
+StationObject 15,4 :north 3
+LandmarkObject 4,2 :statue
+LandmarkObject 12,3 :statue
