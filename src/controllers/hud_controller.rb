@@ -28,7 +28,6 @@ module ScenicRoute
           next_level_img,
           IO::ImageManager.image(:button_next_level_hover)
         ).on_click do
-          # TODO: blackscreen on final level
           ControllerSupervisor.controller(TransitionController).cover_during do
             IO::SaveManager.save_map_state(map)
             sleep 1
