@@ -28,13 +28,21 @@ module ScenicRoute
           next_level_img,
           IO::ImageManager.image(:button_next_level_hover)
         ).on_click do
+          # TODO: blackscreen on final level
           ControllerSupervisor.controller(TransitionController).cover_during do
             IO::SaveManager.save_map_state(map)
             sleep 1
             
             new_map_idx = IO::LevelManager.maps.map { |m| m.metadata.id }.index(map.metadata.id) + 1
             new_map = IO::LevelManager.maps[new_map_idx]
-            ControllerSupervisor.load_map(new_map)
+
+            if new_map.nil?
+              ControllerSupervisor.controller(MenuController).current_page = :title
+              ControllerSupervisor.controller(MapController).map = nil
+              ControllerSupervisor.controller(DialogueController).dialogue_queue = []
+            else
+              ControllerSupervisor.load_map(new_map)
+            end
           end
         end
       end
