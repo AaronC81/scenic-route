@@ -23,6 +23,10 @@ module ScenicRoute
   # The main game.
   class Game < Gosu::Window
     ##
+    # A hash of the command-line options the game was run with.
+    OPTIONS = ARGV.join(' ').scan(/--?([^=\s]+)(?:=(\S+))?/).to_h
+
+    ##
     # The virtual width of the game window. This is not necessarily the same
     # as the current resolution width.
     WIDTH = 1280  
@@ -34,15 +38,15 @@ module ScenicRoute
 
     ##
     # The resolution width of the window.
-    ACTUAL_WIDTH = 1920
+    ACTUAL_WIDTH = (OPTIONS['width'] || 1920).to_i
 
     ##
     # The resolution height of the window.
-    ACTUAL_HEIGHT = 1080
+    ACTUAL_HEIGHT = (OPTIONS['height'] || 1080).to_i
 
     ##
     # Whether to make the window fullscreen.
-    FULLSCREEN = true
+    FULLSCREEN = !(OPTIONS['fullscreen'] == 'false')
 
     ##
     # The frames-per-second at which the game should run.
