@@ -83,7 +83,7 @@ module ScenicRoute
         if @current_index_tick_counter % CHARACTER_TIME == 0 && !current_done?
           @current_index_tick_counter = 0
           @current_index += 1 
-          IO::SampleManager.sample(:speak).play unless
+          IO::SampleManager.sample(:speak).play(Game::VOLUME) unless
             dialogue_queue.first[@current_index] == ' '
         end
 

@@ -49,6 +49,10 @@ module ScenicRoute
     FULLSCREEN = !(OPTIONS['fullscreen'] == 'false')
 
     ##
+    # The volume to play sounds at.
+    VOLUME = (OPTIONS['volume'] || 0.5).to_f
+
+    ##
     # The frames-per-second at which the game should run.
     FPS = 60
 

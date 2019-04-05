@@ -56,7 +56,7 @@ module ScenicRoute
           UI::MouseElement.new(Entities::Point.new(x, y), level_card_img,
             IO::ImageManager.image(:level_card_hover)).on_click do
             if !IO::LevelManager.locked?(m) && map.nil? && current_page == :level_select
-              IO::SampleManager.sample(:select2).play
+              IO::SampleManager.sample(:select2).play(Game::VOLUME)
               ControllerSupervisor.controller(TransitionController).cover_during do
                 sleep 1
                 ControllerSupervisor.load_map(m)
@@ -66,7 +66,7 @@ module ScenicRoute
             next unless current_page == :level_select && map.nil? 
             self.hovered_map = m
             IO::SaveManager.load_map_state(m)
-            IO::SampleManager.sample(:hover).play
+            IO::SampleManager.sample(:hover).play(Game::VOLUME)
           end.on_unhover do
             next unless current_page == :level_select && map.nil? 
             self.hovered_map = nil
@@ -144,7 +144,7 @@ module ScenicRoute
         super
 
         if id == Gosu::MS_LEFT && current_page == :title
-          IO::SampleManager.sample(:begin).play
+          IO::SampleManager.sample(:begin).play(Game::VOLUME)
           ControllerSupervisor.controller(TransitionController).cover_during do
             sleep 1
             self.current_page = :level_select

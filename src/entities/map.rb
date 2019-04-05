@@ -115,9 +115,9 @@ module ScenicRoute
         join_adjacent_routes
 
         if completed_route.nil?
-          IO::SampleManager.sample(:place).play
+          IO::SampleManager.sample(:place).play(Game::VOLUME)
         else
-          IO::SampleManager.sample(:track_complete).play
+          IO::SampleManager.sample(:track_complete).play(Game::VOLUME)
           completed_route.sparkle
         end
 
@@ -168,7 +168,7 @@ module ScenicRoute
         return false unless removed
         join_adjacent_routes
 
-        IO::SampleManager.sample(:remove).play if removed
+        IO::SampleManager.sample(:remove).play(Game::VOLUME) if removed
 
         true
       end
