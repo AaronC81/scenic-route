@@ -102,6 +102,10 @@ module ScenicRoute
       # @param [Tiles::TileSet] tile_set
       # @return [Entities::Map]
       def self.load_map(filename, tile_set)
+        @@loaded_maps ||= {}
+
+        return @@loaded_maps[filename] unless @@loaded_maps[filename].nil?
+
         contents = File.read(filename).gsub(?\r, '')
         name, id, sort_key, medal_thresholds_str, dialogue_str, layout_str, objects_str = contents.split("\n---\n")
 
@@ -115,7 +119,7 @@ module ScenicRoute
         map.metadata = MapMetadata.new(name, id, sort_key.to_i,
           medal_thresholds_str.split.map(&:to_i), dialogue_array)
 
-        map
+        @@loaded_maps[filename] = map
       end
     end
   end
