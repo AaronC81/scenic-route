@@ -36,7 +36,7 @@ module ScenicRoute
       # @param [Entities::Map] map
       # @return [Integer]
       def self.overall_score_for_map(map)
-        scores_for_map(map).values.min
+        scores_for_map(map).values.compact.min
       end
 
       ## 
