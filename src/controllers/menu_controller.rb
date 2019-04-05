@@ -110,7 +110,7 @@ module ScenicRoute
           end
 
           # Draw the map preview
-          unless hovered_map.nil?
+          if !hovered_map.nil? && !IO::LevelManager.locked?(hovered_map)
             # Resize the map so it's 480 pixels wide
             target_width = 480.0
             map_scale_factor = target_width / hovered_map.pixel_width
