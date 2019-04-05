@@ -4,7 +4,7 @@ fe7a0a50-3a16-0137-3895-64006afdaf02
 ---
 10
 ---
-10 18 23
+10 18 20
 ---
 
 ---
@@ -23,3 +23,4 @@ StationObject 10,1 :west 1
 StationObject 10,8 :west 1
 StationObject 1,4 :south 2
 StationObject 1,7 :north 2
+LandmarkObject 5,5 :statue
