@@ -1,0 +1,29 @@
+8
+---
+113265e0-3963-0137-3893-64006afdaf02
+---
+8
+---
+10 20 30
+---
+
+---
+D^^^^^^^^A
+<########>
+<########>
+<########>
+<########>
+<########>
+<########>
+<########>
+C________B
+---
+StationObject 2,2 :east 1
+StationObject 2,6 :east 1
+ObstacleObject 5,4 :tree
+ObstacleObject 6,2 :tree
+LandmarkObject 4,5 :statue
+ObstacleObject 8,6 :tree
+ObstacleObject 8,7 :tree
+ObstacleObject 1,4 :tree
+ObstacleObject 2,7 :tree
