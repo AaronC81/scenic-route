@@ -31,6 +31,11 @@ module ScenicRoute
       attr_accessor :metadata
 
       ##
+      # @return [Gosu::Image] The pre-rendered backing image underneath the
+      #   routes and objects.
+      attr_accessor :backing_image
+
+      ##
       # @param [Class] clazz The kind of tile object to return. Matches all if
       #   left as default (nil). If any value is used other than nil, the 
       #   return array should NOT be modified.
@@ -51,6 +56,17 @@ module ScenicRoute
         @tile_set = tile_set
         @tile_objects = []
         @routes = []
+
+        tile_set = Tiles::TileManager.tile_set(:world)
+
+        @backing_image = Gosu.record(pixel_width, pixel_height) do
+          width.times do |mx|
+            height.times do |my|
+              tile_set.tile(layout[my][mx]).draw(
+                mx * tile_set.width, my * tile_set.height, 0)
+            end
+          end
+        end
       end
 
       ##
@@ -234,16 +250,22 @@ module ScenicRoute
       def draw(start_x, start_y, z)
         tile_set = Tiles::TileManager.tile_set(:world)
 
-        width.times do |mx|
-          height.times do |my|
-            this_tile_names = tiles_at(Point.new(mx, my))
-            this_tile_x = tile_set.width * mx + start_x
-            this_tile_y = tile_set.height * my + start_y
+        backing_image.draw(start_x, start_y, z)
 
-            this_tile_names.each.with_index do |tile, i|
-              tile_set.tile(tile).draw(this_tile_x, this_tile_y, z + i)
-            end
+        routes.each do |route|
+          route.to_tile_hash.each do |point, tile|
+            this_tile_x = tile_set.width * point.x + start_x
+            this_tile_y = tile_set.height * point.y + start_y
+
+            tile_set.tile(tile).draw(this_tile_x, this_tile_y, z + 1)
           end
+        end
+
+        tile_objects.each do |obj|
+          this_tile_x = tile_set.width * obj.point.x + start_x
+          this_tile_y = tile_set.height * obj.point.y + start_y
+
+          tile_set.tile(obj.tile_name).draw(this_tile_x, this_tile_y, z + 1)
         end
       end
     end 
