@@ -1,0 +1,23 @@
+13
+---
+82d92a00-3ae9-0137-3899-64006afdaf02
+---
+13
+---
+20 40 60
+---
+
+---
+D^^^^^^^^^^^^^^^^^^A
+<############g#####>
+<###fh#######e#####>
+<##################>
+<#########fih######>
+<###g##############>
+C___G______________B
+---
+StationObject 1,3 :east 1
+StationObject 18,3 :west 1
+LandmarkObject 9,4 :statue
+LandmarkObject 18,5 :statue
+LandmarkObject 14,1 :statue
