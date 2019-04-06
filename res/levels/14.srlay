@@ -1,0 +1,26 @@
+14
+---
+3a3ee040-3aed-0137-389c-64006afdaf02
+---
+14
+---
+5 10 15
+---
+
+---
+D^^^A..D^^^A
+<###>..<###>
+<###a^^d###>
+<##########>
+C__c####b__B
+...<####>...
+D^^d####a^^A
+<##########>
+<###b__c###>
+<###>..<###>
+C___B..C___B
+---
+StationObject 1,1 :south 1
+StationObject 10,9 :north 1
+StationObject 1,8 :east 2
+StationObject 6,7 :north 2
