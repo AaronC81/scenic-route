@@ -1,0 +1,28 @@
+15
+---
+f5e253f0-3b87-0137-389d-64006afdaf02
+---
+15
+---
+0 0 0
+---
+
+---
+D^^^^A.....
+<####>.....
+<####>.....
+<####>.....
+<####>.....
+<####a^^^^A
+<#########>
+<#########>
+<#########>
+<#########>
+C_________B
+---
+StationObject 1,1 :south 1
+StationObject 9,9 :west 1
+StationObject 4,1 :south 2
+StationObject 9,6 :west 2
+ObstacleObject 3,7 :tree
+ObstacleObject 1,9 :tree
