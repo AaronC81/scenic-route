@@ -1,0 +1,28 @@
+17
+---
+875ac640-3b9f-0137-38a0-64006afdaf02
+---
+17
+---
+10 20 32
+---
+
+---
+D^^^^^^^^^A
+<#########>
+<#########>
+<#fiiiiih#>
+<##g######>
+<##e######>
+<#########>
+<####fiiiiF
+<#########>
+C_________B
+---
+StationObject 5,1 :south 1
+StationObject 9,8 :west 1
+ObstacleObject 4,1 :tree
+ObstacleObject 6,1 :tree
+LandmarkObject 2,4 :statue
+LandmarkObject 2,5 :statue
+ObstacleObject 3,7 :tree
